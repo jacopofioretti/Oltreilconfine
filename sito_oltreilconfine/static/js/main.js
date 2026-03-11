@@ -231,6 +231,57 @@
   });
 })();
 
+// ── PDF Modal ─────────────────────────────────
+function openPdfModal(pdfUrl, title) {
+  const modal = document.getElementById('pdf-modal');
+  const iframe = document.getElementById('pdf-modal-iframe');
+  const titleEl = document.getElementById('pdf-modal-title');
+  const dlBtn = document.getElementById('pdf-modal-download');
+  if (!modal || !iframe) return;
+
+  iframe.src = pdfUrl;
+  if (titleEl) titleEl.textContent = title || 'Documento PDF';
+  if (dlBtn) { dlBtn.href = pdfUrl; dlBtn.download = pdfUrl.split('/').pop(); }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+(function () {
+  const closeBtn = document.getElementById('pdf-modal-close');
+  const modal = document.getElementById('pdf-modal');
+  if (!modal) return;
+
+  function closePdfModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    // Slight delay before clearing src to avoid flash
+    setTimeout(() => {
+      const iframe = document.getElementById('pdf-modal-iframe');
+      if (iframe) iframe.src = '';
+    }, 400);
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closePdfModal);
+
+  // Close on backdrop click
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closePdfModal();
+  });
+
+  // Keyboard: Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) closePdfModal();
+  });
+
+  // Card keyboard accessibility
+  document.querySelectorAll('.locandina-card[role="button"]').forEach(card => {
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
+})();
+
 // ── Keyboard accessibility ─────────────────────
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {

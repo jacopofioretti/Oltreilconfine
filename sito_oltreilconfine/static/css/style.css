@@ -7,14 +7,21 @@
 
 /* ── Variables ── */
 :root {
-  --ink:        #0c0a08;
-  --parchment:  #f5f0e8;
-  --gold:       #b8965a;
-  --gold-light: #d4b483;
-  --rust:       #8b3a2a;
-  --smoke:      #2a2520;
-  --mist:       #6b6560;
-  --border:     rgba(184,150,90,0.25);
+  --ink:        #142C14;
+  --parchment:  #f0f4e8;
+  --gold:       #537B2F;
+  --gold-light: #8DA750;
+  --rust:       #2D5128;
+  --smoke:      #1e3d1e;
+  --mist:       #4a6b3a;
+  --border:     rgba(83,123,47,0.28);
+
+  /* palette refs */
+  --green-dark:  #142C14;
+  --green-mid:   #2D5128;
+  --green-fern:  #537B2F;
+  --green-asp:   #8DA750;
+  --green-light: #E4EB9C;
 
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans:  'Tenor Sans', sans-serif;
@@ -1161,6 +1168,286 @@ section { position: relative; }
   font-size: 0.65rem;
   letter-spacing: 0.3em;
   color: var(--mist);
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+/* ════════════════════════════════════════
+   LOCANDINE / PDF SECTION
+════════════════════════════════════════ */
+.locandine {
+  background: linear-gradient(180deg, var(--ink) 0%, var(--smoke) 100%);
+}
+.locandine-intro {
+  max-width: 55ch;
+  font-size: 1rem;
+  line-height: 1.85;
+  color: rgba(240,244,232,0.7);
+  margin-top: 1.5rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Cards grid */
+.locandine-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: 3rem;
+}
+
+.locandina-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.4s var(--ease-out);
+  cursor: pointer;
+  background: rgba(255,255,255,0.02);
+}
+.locandina-card:hover {
+  border-color: var(--green-asp);
+  transform: translateY(-4px);
+}
+
+/* PDF Thumbnail */
+.locandina-thumb {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--green-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.locandina-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) sepia(0.15);
+  transition: filter 0.5s, transform 0.6s var(--ease-out);
+}
+.locandina-card:hover .locandina-thumb img {
+  filter: brightness(0.85) sepia(0);
+  transform: scale(1.04);
+}
+
+/* PDF icon placeholder (when no image) */
+.locandina-thumb-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--green-asp);
+  opacity: 0.6;
+}
+.locandina-thumb-icon svg { width: 56px; height: 56px; }
+.locandina-thumb-icon span {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* Overlay on hover */
+.locandina-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,44,20,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s;
+  backdrop-filter: blur(2px);
+}
+.locandina-card:hover .locandina-overlay { opacity: 1; }
+.locandina-overlay-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--green-light);
+  border: 1px solid rgba(228,235,156,0.5);
+  padding: 0.6rem 1.4rem;
+}
+
+/* Card info */
+.locandina-info {
+  padding: 1.4rem 1.6rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.locandina-num {
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--green-asp);
+}
+.locandina-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--parchment);
+}
+.locandina-subtitle {
+  font-size: 0.8rem;
+  color: var(--mist);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+.locandina-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.locandina-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--border);
+  color: var(--green-asp);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  text-decoration: none;
+}
+.locandina-btn:hover {
+  background: var(--green-fern);
+  color: var(--parchment);
+  border-color: var(--green-fern);
+}
+.locandina-btn svg { flex-shrink: 0; }
+.locandina-btn-primary {
+  background: var(--green-fern);
+  color: var(--parchment);
+  border-color: var(--green-fern);
+}
+.locandina-btn-primary:hover {
+  background: var(--green-asp);
+  border-color: var(--green-asp);
+}
+
+/* PDF Modal Viewer */
+.pdf-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  display: flex;
+  flex-direction: column;
+  background: rgba(20,44,20,0.92);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);
+}
+.pdf-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.pdf-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.pdf-modal-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--green-light);
+  font-style: italic;
+}
+.pdf-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.pdf-modal-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--green-asp);
+  border: 1px solid var(--border);
+  padding: 0.45rem 1.1rem;
+  transition: background 0.3s, color 0.3s;
+}
+.pdf-modal-download:hover {
+  background: var(--green-fern);
+  color: var(--parchment);
+  border-color: var(--green-fern);
+}
+.pdf-modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--parchment);
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.pdf-modal-close:hover { background: var(--green-fern); color: var(--parchment); }
+.pdf-modal-body {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+}
+.pdf-modal-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Programma scaricabile banner */
+.programma-banner {
+  margin-top: 3rem;
+  padding: 2rem 2.5rem;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: rgba(83,123,47,0.07);
+  flex-wrap: wrap;
+  transition: border-color 0.3s, background 0.3s;
+}
+.programma-banner:hover {
+  border-color: var(--green-asp);
+  background: rgba(83,123,47,0.12);
+}
+.programma-banner-text {}
+.programma-banner-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--green-asp);
+  margin-bottom: 0.4rem;
+}
+.programma-banner-title {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--parchment);
+}
+.programma-banner-subtitle {
+  font-size: 0.85rem;
+  color: var(--mist);
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .locandine-grid { grid-template-columns: 1fr; }
+  .pdf-modal-header { padding: 1rem; }
+  .programma-banner { flex-direction: column; align-items: flex-start; }
 }
 
 /* ════════════════════════════════════════

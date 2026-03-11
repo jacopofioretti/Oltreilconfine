@@ -43,7 +43,7 @@
 
   <ul class="nav-links" role="list">
     <li><a href="#about">Il Progetto</a></li>
-    <li><a href="#events">Appuntamenti</a></li>
+    <li><a href="#locandine">Locandine</a></li>
     <li><a href="#phases">Fasi</a></li>
     <li><a href="#gallery">Galleria</a></li>
     <li><a href="#contact" class="nav-cta">Contatti</a></li>
@@ -57,7 +57,7 @@
 <!-- Mobile nav overlay -->
 <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
   <a href="#about">Il Progetto</a>
-  <a href="#events">Appuntamenti</a>
+  <a href="#locandine">Locandine</a>
   <a href="#phases">Fasi</a>
   <a href="#gallery">Galleria</a>
   <a href="#contact">Contatti</a>
@@ -74,7 +74,7 @@
       Percorso: {% static 'images/hero/hero-landscape.jpg' %}
     -->
     <img
-      src="{% static 'images/hero/hero-ungaretti.jpeg' %}"
+      src="https://images.unsplash.com/photo-1599045118108-bf9954418b76?w=1920&q=80"
       alt="Paesaggio del Carso friulano al tramonto"
       fetchpriority="high"
     />
@@ -207,141 +207,164 @@
 <!-- ════════════════════════════════════════════
      EVENTS / APPUNTAMENTI
 ════════════════════════════════════════════ -->
-<section class="events" id="events">
+<!-- ════════════════════════════════════════════
+     LOCANDINE & PROGRAMMA PDF
+════════════════════════════════════════════ -->
+<section class="locandine" id="locandine">
   <div class="section-inner">
-    <div class="events-header reveal">
-      <div>
-        <p class="section-label">Prima Fase</p>
-        <h2 class="section-title">
-          Gli <em>Appuntamenti</em>
-        </h2>
+
+    <div class="reveal">
+      <p class="section-label">Locandine &amp; Programma</p>
+      <h2 class="section-title">
+        Gli <em>Appuntamenti</em>
+      </h2>
+    </div>
+    <p class="locandina-intro reveal" data-delay="1">
+      Consulta le locandine ufficiali del progetto e scarica il programma completo di tutti gli appuntamenti della prima fase, nei comuni del Friuli Venezia Giulia e della Slovenia.
+    </p>
+
+    <!-- ── Cards Locandine ── -->
+    <div class="locandine-grid">
+
+      <!-- Locandina 1 -->
+      <div class="locandina-card reveal" data-delay="1"
+           role="button" tabindex="0"
+           aria-label="Apri locandina Prima Fase"
+           onclick="openPdfModal('{% static 'documents/locandina-prima-fase.pdf' %}', 'Locandina — Prima Fase · Gen–Mar 2025')">
+        <div class="locandina-thumb">
+          <!--
+            ANTEPRIMA LOCANDINA 1:
+            Puoi usare un'immagine JPG/PNG della locandina come preview,
+            oppure lascia il blocco icona PDF qui sotto.
+            Percorso immagine: {% static 'images/locandine/locandina-1-preview.jpg' %}
+          -->
+          <div class="locandina-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="9" y1="13" x2="15" y2="13"/>
+              <line x1="9" y1="17" x2="15" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span>PDF · Locandina</span>
+          </div>
+          <div class="locandina-overlay">
+            <span class="locandina-overlay-label">Apri &amp; Visualizza</span>
+          </div>
+        </div>
+        <div class="locandina-info">
+          <p class="locandina-num">Locandina 01</p>
+          <h3 class="locandina-title">Prima Fase · Serate Letterarie</h3>
+          <p class="locandina-subtitle">Gennaio – Marzo 2025 · 9 Comuni</p>
+          <div class="locandina-actions">
+            <button class="locandina-btn locandina-btn-primary"
+                    onclick="event.stopPropagation(); openPdfModal('{% static 'documents/locandina-prima-fase.pdf' %}', 'Locandina — Prima Fase · Gen–Mar 2025')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              Visualizza
+            </button>
+            <a class="locandina-btn"
+               href="{% static 'documents/locandina-prima-fase.pdf' %}"
+               download="Locandina-OltreconfineUngaretti-Prima-Fase.pdf"
+               onclick="event.stopPropagation()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Scarica PDF
+            </a>
+          </div>
+        </div>
       </div>
-      <a href="#" class="events-view-all">Tutti gli eventi →</a>
+
+      <!-- Locandina 2 -->
+      <div class="locandina-card reveal" data-delay="2"
+           role="button" tabindex="0"
+           aria-label="Apri locandina Spettacolo Estate"
+           onclick="openPdfModal('{% static 'documents/locandina-spettacolo.pdf' %}', 'Locandina — Spettacolo Estate 2025')">
+        <div class="locandina-thumb">
+          <!--
+            ANTEPRIMA LOCANDINA 2:
+            Percorso immagine: {% static 'images/locandine/locandina-2-preview.jpg' %}
+          -->
+          <div class="locandina-thumb-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="9" y1="13" x2="15" y2="13"/>
+              <line x1="9" y1="17" x2="15" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span>PDF · Locandina</span>
+          </div>
+          <div class="locandina-overlay">
+            <span class="locandina-overlay-label">Apri &amp; Visualizza</span>
+          </div>
+        </div>
+        <div class="locandina-info">
+          <p class="locandina-num">Locandina 02</p>
+          <h3 class="locandina-title">Messinscena Bilingue · Estate 2025</h3>
+          <p class="locandina-subtitle">Processione Laica · Siti Storici all'Aperto</p>
+          <div class="locandina-actions">
+            <button class="locandina-btn locandina-btn-primary"
+                    onclick="event.stopPropagation(); openPdfModal('{% static 'documents/locandina-spettacolo.pdf' %}', 'Locandina — Spettacolo Estate 2025')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              Visualizza
+            </button>
+            <a class="locandina-btn"
+               href="{% static 'documents/locandina-spettacolo.pdf' %}"
+               download="Locandina-OltreconfineUngaretti-Spettacolo.pdf"
+               onclick="event.stopPropagation()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Scarica PDF
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.locandine-grid -->
+
+    <!-- ── Programma Banner ── -->
+    <div class="programma-banner reveal">
+      <div class="programma-banner-text">
+        <p class="programma-banner-label">Programma Completo</p>
+        <h3 class="programma-banner-title">Tutti gli appuntamenti in un unico documento</h3>
+        <p class="programma-banner-subtitle">Date, luoghi, ospiti e note per ogni serata — Gennaio/Marzo 2025</p>
+      </div>
+      <div style="display:flex; gap:0.8rem; flex-wrap:wrap; flex-shrink:0;">
+        <button class="locandina-btn locandina-btn-primary"
+                onclick="openPdfModal('{% static 'documents/programma-completo.pdf' %}', 'Programma Completo — Tutte le Serate 2025')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          Sfoglia online
+        </button>
+        <a class="locandina-btn"
+           href="{% static 'documents/programma-completo.pdf' %}"
+           download="Programma-OltreconfineUngaretti-2025.pdf">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Scarica PDF
+        </a>
+      </div>
     </div>
 
-    <div class="timeline" role="list">
-
-      <!-- Event 1 -->
-      <div class="timeline-item reveal" role="listitem">
-        <div class="timeline-date">
-          <span class="timeline-date-day">26</span>
-          <span class="timeline-date-month">Gen</span>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-body">
-          <p class="timeline-location">Santa Maria la Longa · Tissano</p>
-          <h3 class="timeline-title">Villa Mauroner — Debutto di Oltreconfine Ungaretti</h3>
-          <p class="timeline-venue">La localitá della poesia "Mattina"</p>
-          <div class="timeline-speakers">
-            <span class="speaker-tag">Francesco Accomando</span>
-            <span class="speaker-tag">Antonino Di Colloredo Mels</span>
-            <span class="speaker-tag">Carlo Del Mestre</span>
-            <span class="speaker-tag">Giulia Sattolo</span>
-            <span class="speaker-tag">Duo Imbriaco–Raciti</span>
-          </div>
-          <p class="timeline-time">ore 17:00</p>
-        </div>
-      </div>
-
-      <!-- Event 2 -->
-      <div class="timeline-item reveal" data-delay="1" role="listitem">
-        <div class="timeline-date">
-          <span class="timeline-date-day">29</span>
-          <span class="timeline-date-month">Gen</span>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-body">
-          <p class="timeline-location">Sagrado · Comune Capofila</p>
-          <h3 class="timeline-title">Sala Polifunzionale Sergio Ferlan</h3>
-          <p class="timeline-venue">I luoghi ungarettiani e il Monte San Michele</p>
-          <div class="timeline-speakers">
-            <span class="speaker-tag">Francesco Accomando</span>
-            <span class="speaker-tag">Elisa De Zan</span>
-            <span class="speaker-tag">Lucia Vinzi</span>
-            <span class="speaker-tag">Aleksandra Devetak</span>
-            <span class="speaker-tag">Matteo Antoni</span>
-          </div>
-          <p class="timeline-time">ore 18:30</p>
-        </div>
-      </div>
-
-      <!-- Event 3 -->
-      <div class="timeline-item reveal" data-delay="2" role="listitem">
-        <div class="timeline-date">
-          <span class="timeline-date-day">04</span>
-          <span class="timeline-date-month">Feb</span>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-body">
-          <p class="timeline-location">Campolongo Tapogliano</p>
-          <h3 class="timeline-title">Serata letteraria — Terza Tappa</h3>
-          <p class="timeline-venue">Tra storia e poesia, i segni della guerra nel territorio</p>
-          <div class="timeline-speakers">
-            <span class="speaker-tag">Francesco Accomando</span>
-          </div>
-          <p class="timeline-time">ore 18:00</p>
-        </div>
-      </div>
-
-      <!-- Event 4 -->
-      <div class="timeline-item reveal" data-delay="1" role="listitem">
-        <div class="timeline-date">
-          <span class="timeline-date-day">11</span>
-          <span class="timeline-date-month">Feb</span>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-body">
-          <p class="timeline-location">Mariano del Friuli</p>
-          <h3 class="timeline-title">Serata letteraria — Quarta Tappa</h3>
-          <p class="timeline-venue">Paesaggi e memorie lungo l'Isonzo</p>
-          <div class="timeline-speakers">
-            <span class="speaker-tag">Francesco Accomando</span>
-          </div>
-          <p class="timeline-time">ore 18:00</p>
-        </div>
-      </div>
-
-      <!-- Event 5 -->
-      <div class="timeline-item reveal" data-delay="2" role="listitem">
-        <div class="timeline-date">
-          <span class="timeline-date-day">06</span>
-          <span class="timeline-date-month">Mar</span>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-body">
-          <p class="timeline-location">Gorizia</p>
-          <h3 class="timeline-title">Serata Letteraria — Gorizia Capitale</h3>
-          <p class="timeline-venue">Nel segno di Go!2025 — Capitale Europea della Cultura</p>
-          <div class="timeline-speakers">
-            <span class="speaker-tag">Francesco Accomando</span>
-            <span class="speaker-tag">Ospiti speciali</span>
-          </div>
-          <p class="timeline-time">ore 18:00</p>
-        </div>
-      </div>
-
-      <!-- Event Nova Gorica -->
-      <div class="timeline-item reveal" data-delay="1" role="listitem">
-        <div class="timeline-date">
-          <span class="timeline-date-day">TBD</span>
-          <span class="timeline-date-month">Mar</span>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-body">
-          <p class="timeline-location">Nova Gorica · Slovenia</p>
-          <h3 class="timeline-title">Serata Transfrontaliera — Nova Gorica</h3>
-          <p class="timeline-venue">Oltre il confine, verso la comunità slovena</p>
-          <div class="timeline-speakers">
-            <span class="speaker-tag">Francesco Accomando</span>
-            <span class="speaker-tag">Ospiti slovenofoni</span>
-          </div>
-          <p class="timeline-time">Data da definire</p>
-        </div>
-      </div>
-
-    </div><!-- /.timeline -->
-  </div>
+  </div><!-- /.section-inner -->
 </section>
+
+<!-- ════════════════════════════════════════════
+     PDF MODAL VIEWER
+════════════════════════════════════════════ -->
+<div class="pdf-modal" id="pdf-modal" role="dialog" aria-modal="true" aria-label="Visualizzatore PDF">
+  <div class="pdf-modal-header">
+    <span class="pdf-modal-title" id="pdf-modal-title"></span>
+    <div class="pdf-modal-actions">
+      <a class="pdf-modal-download" id="pdf-modal-download" href="#" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Scarica
+      </a>
+      <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Chiudi visualizzatore">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="pdf-modal-body">
+    <iframe id="pdf-modal-iframe" title="Visualizzatore PDF" src="" allow="fullscreen"></iframe>
+  </div>
+</div>
 
 <!-- ════════════════════════════════════════════
      FASI DEL PROGETTO
@@ -589,7 +612,7 @@
       <p class="footer-col-title">Sezioni</p>
       <ul class="footer-links">
         <li><a href="#about">Il Progetto</a></li>
-        <li><a href="#events">Appuntamenti</a></li>
+        <li><a href="#locandine">Locandine</a></li>
         <li><a href="#phases">Fasi</a></li>
         <li><a href="#gallery">Galleria</a></li>
       </ul>
