@@ -463,14 +463,14 @@ section { position: relative; }
 }
 .about-image-wrap img {
   width: 100%;
-  aspect-ratio: 3/4;
+  height: auto;
   object-fit: cover;
   filter: sepia(0.2) brightness(0.85);
 }
 .about-image-wrap::before {
   content: '';
   position: absolute;
-  inset: -12px 12px 12px -12px;
+  inset: -8px 8px 8px -8px;
   border: 1px solid var(--border);
   z-index: -1;
   transition: transform 0.5s var(--ease-out);
@@ -479,7 +479,7 @@ section { position: relative; }
   transform: translate(-4px, 4px);
 }
 .about-caption {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
