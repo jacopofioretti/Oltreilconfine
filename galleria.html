@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Galleria completa del progetto Oltreconfine Ungaretti — Tutte le foto dei luoghi e degli eventi." />
+  <meta property="og:title" content="Galleria — Oltreconfine Ungaretti" />
+  <meta name="theme-color" content="#0c0a08" />
+  <title>Galleria — Oltreconfine Ungaretti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="sito_oltreilconfine/static/css/style.css?v=1.4" />
+  <style>
+    .gallery-page-hero { position: relative; height: 55vh; min-height: 400px; display: flex; align-items: flex-end; overflow: hidden; }
+    .gallery-page-hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .gallery-page-hero-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.28) sepia(0.35); transform: scale(1.05); }
+    .gallery-page-hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--ink) 0%, transparent 45%), linear-gradient(to right, rgba(12,10,8,0.8) 0%, transparent 65%); }
+    .gallery-page-hero-content { position: relative; z-index: 10; padding: 0 clamp(1.5rem, 7vw, 7rem) clamp(3rem, 5vw, 4.5rem); width: 100%; }
+    .gallery-page-hero-content .hero-eyebrow { opacity: 1; transform: none; animation: none; margin-bottom: 1rem; }
+    .gallery-page-hero-title { font-family: var(--font-serif); font-size: clamp(3rem, 7vw, 6.5rem); font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 2rem; }
+    .gallery-page-hero-title em { font-style: italic; color: var(--gold-light); display: block; }
+    .gallery-page-hero-meta { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .gallery-count-badge { font-family: var(--font-sans); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mist); border: 1px solid var(--border); padding: 0.45rem 1.2rem; }
+    .gallery-info-row { max-width: 1320px; margin: 0 auto; padding: clamp(3rem, 5vw, 5rem) clamp(1.5rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+    .gallery-nav-back { display: inline-flex; align-items: center; gap: 0.7rem; font-family: var(--font-body); font-size: 0.65rem; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-light); border: 1px solid var(--border); padding: 0.7rem 1.6rem; transition: background 0.3s, color 0.3s, border-color 0.3s; position: relative; overflow: hidden; text-decoration: none; flex-shrink: 0; }
+    .gallery-nav-back::before { content: ''; position: absolute; inset: 0; background: var(--gold); transform: translateX(-101%); transition: transform 0.4s var(--ease-out); }
+    .gallery-nav-back:hover::before { transform: none; }
+    .gallery-nav-back:hover { color: var(--ink); border-color: var(--gold); }
+    .gallery-nav-back svg, .gallery-nav-back span { position: relative; z-index: 1; }
+    .slideshow-section { background: var(--ink); }
+    .slideshow-wrap { position: relative; width: 100%; background: #060504; }
+    .slideshow-viewport { position: relative; width: 100%; height: 72vh; min-height: 480px; overflow: hidden; }
+    .slideshow-track { display: flex; height: 100%; will-change: transform; transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1); }
+    .slideshow-slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #060504; overflow: hidden; }
+    .slideshow-slide img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; filter: brightness(0.9); transition: filter 0.6s; }
+    .slideshow-slide.active img { filter: brightness(1); }
+    .slideshow-progress-bar { position: absolute; top: 0; left: 0; height: 2px; background: var(--gold); transition: none; z-index: 30; }
+    .slideshow-progress-bar.animating { transition: width linear; }
+    .slideshow-counter { position: absolute; top: 1.5rem; left: 2rem; pointer-events: none; z-index: 20; }
+    .slideshow-counter-current { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 300; color: var(--parchment); line-height: 1; display: block; }
+    .slideshow-counter-sep { display: block; width: 28px; height: 1px; background: var(--gold); margin: 0.4rem 0; }
+    .slideshow-counter-total { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--mist); display: block; }
+    .slideshow-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: 1px solid rgba(83,123,47,0.35); background: rgba(12,10,8,0.55); backdrop-filter: blur(8px); color: var(--parchment); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 25; transition: border-color 0.3s, background 0.3s, color 0.3s; }
+    .slideshow-arrow:hover { border-color: var(--gold); background: rgba(83,123,47,0.3); color: var(--gold-light); }
+    .slideshow-arrow.prev { left: 1.5rem; }
+    .slideshow-arrow.next { right: 1.5rem; }
+    .slideshow-controls { position: absolute; bottom: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.6rem; z-index: 25; }
+    .slideshow-speed-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mist); }
+    .speed-btn { font-family: var(--font-body); font-size: 0.6rem; font-weight: 400; letter-spacing: 0.2em; color: var(--mist); border: 1px solid transparent; background: transparent; padding: 0.3rem 0.55rem; cursor: pointer; transition: color 0.3s, border-color 0.3s; }
+    .speed-btn.active { color: var(--gold-light); border-color: var(--border); }
+    .speed-btn:hover { color: var(--gold-light); }
+    .playpause-btn { width: 38px; height: 38px; border: 1px solid var(--border); background: rgba(12,10,8,0.6); backdrop-filter: blur(6px); color: var(--gold-light); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.3s, background 0.3s; }
+    .playpause-btn:hover { border-color: var(--gold); background: rgba(83,123,47,0.25); }
+    .thumb-strip-wrap { background: #0a0806; border-top: 1px solid var(--border); padding: 0.8rem 0; }
+    .thumb-strip-inner { display: flex; gap: 5px; overflow-x: auto; padding: 0.3rem clamp(1rem, 4vw, 3rem); scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+    .thumb-strip-inner::-webkit-scrollbar { height: 3px; }
+    .thumb-strip-inner::-webkit-scrollbar-track { background: transparent; }
+    .thumb-strip-inner::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .thumb-item { flex-shrink: 0; width: 72px; height: 52px; overflow: hidden; cursor: pointer; border: 1px solid transparent; opacity: 0.4; transition: opacity 0.3s, border-color 0.3s; }
+    .thumb-item:hover { opacity: 0.7; }
+    .thumb-item.active { opacity: 1; border-color: var(--gold); }
+    .thumb-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    @media (max-width: 768px) {
+      .slideshow-viewport { height: 56vw; min-height: 320px; }
+      .slideshow-counter { top: 1rem; left: 1rem; }
+      .slideshow-counter-current { font-size: 1.6rem; }
+      .slideshow-arrow { width: 36px; height: 36px; }
+      .slideshow-arrow.prev { left: 0.5rem; }
+      .slideshow-arrow.next { right: 0.5rem; }
+      .slideshow-controls { bottom: 0.6rem; right: 0.6rem; }
+      .gallery-page-hero-content { padding: 0 1.5rem 2.5rem; }
+      .gallery-info-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html" class="nav-logo" aria-label="Torna alla homepage">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">Ungaretti · 1914–1919</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#about">Il Progetto</a></li>
+    <li><a href="index.html#locandine">Locandine</a></li>
+    <li><a href="index.html#phases">Fasi</a></li>
+    <li><a href="galleria.html" class="nav-cta">Galleria</a></li>
+    <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+    <li><a href="index.html#contact">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html#about">Il Progetto</a>
+  <a href="index.html#locandine">Locandine</a>
+  <a href="index.html#phases">Fasi</a>
+  <a href="galleria.html">Galleria</a>
+  <a href="rassegna-stampa.html">Rassegna Stampa</a>
+  <a href="index.html#contact">Contatti</a>
+</div>
+
+<section class="gallery-page-hero" aria-label="Galleria fotografica">
+  <div class="gallery-page-hero-bg">
+    <img src="sito_oltreilconfine/static/images/hero/ungaretti-copia.jpeg" alt="Paesaggio del Carso friulano" fetchpriority="high" />
+  </div>
+  <div class="gallery-page-hero-content">
+    <p class="hero-eyebrow">Immagini · Luoghi &amp; Momenti</p>
+    <h1 class="gallery-page-hero-title">Galleria<br><em>Fotografica</em></h1>
+    <div class="gallery-page-hero-meta">
+      <div class="gallery-count-badge">88 Fotografie</div>
+      <div class="gallery-count-badge">Gallery &amp; Gallery 2</div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery-info-row reveal">
+  <div>
+    <p class="section-label">Raccolta fotografica</p>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.2rem);">I <em>Luoghi</em> di Ungaretti</h2>
+    <p style="margin-top:0.8rem;font-size:0.9rem;color:rgba(245,240,232,0.55);max-width:55ch;line-height:1.8;">Immagini dei luoghi e delle serate — Friuli Venezia Giulia e Slovenia.</p>
+  </div>
+  <a href="index.html#gallery" class="gallery-nav-back">
+    <svg width="15" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M15 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <span>Torna alla home</span>
+  </a>
+</div>
+
+<!-- SLIDESHOW -->
+<section class="slideshow-section" aria-label="Presentazione fotografica">
+  <div class="slideshow-wrap">
+    <div class="slideshow-progress-bar" id="slideshow-progress" style="width:0%"></div>
+    <div class="slideshow-viewport" id="slideshow-viewport">
+      <div class="slideshow-track" id="slideshow-track">
+        <div class="slideshow-slide active" data-index="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0517.JPG" alt="Fotografia 1 — Oltreconfine Ungaretti" /></div>
+        <div class="slideshow-slide" data-index="1"><img src="sito_oltreilconfine/static/images/gallery/IMG_0518.JPG" alt="Fotografia 2" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="2"><img src="sito_oltreilconfine/static/images/gallery/IMG_0519.JPG" alt="Fotografia 3" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="3"><img src="sito_oltreilconfine/static/images/gallery/IMG_0520.JPG" alt="Fotografia 4" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="4"><img src="sito_oltreilconfine/static/images/gallery/IMG_0522.JPG" alt="Fotografia 5" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="5"><img src="sito_oltreilconfine/static/images/gallery/IMG_0526.JPG" alt="Fotografia 6" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="6"><img src="sito_oltreilconfine/static/images/gallery/IMG_0527.JPG" alt="Fotografia 7" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="7"><img src="sito_oltreilconfine/static/images/gallery/IMG_0528.JPG" alt="Fotografia 8" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="8"><img src="sito_oltreilconfine/static/images/gallery/IMG_0535.JPG" alt="Fotografia 9" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="9"><img src="sito_oltreilconfine/static/images/gallery/IMG_0536.JPG" alt="Fotografia 10" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="10"><img src="sito_oltreilconfine/static/images/gallery/IMG_0537.JPG" alt="Fotografia 11" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="11"><img src="sito_oltreilconfine/static/images/gallery/IMG_0538.JPG" alt="Fotografia 12" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="12"><img src="sito_oltreilconfine/static/images/gallery/IMG_0539.JPG" alt="Fotografia 13" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="13"><img src="sito_oltreilconfine/static/images/gallery/IMG_0540.JPG" alt="Fotografia 14" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="14"><img src="sito_oltreilconfine/static/images/gallery/IMG_0541.JPG" alt="Fotografia 15" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="15"><img src="sito_oltreilconfine/static/images/gallery/IMG_0542.JPG" alt="Fotografia 16" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="16"><img src="sito_oltreilconfine/static/images/gallery/IMG_0543.JPG" alt="Fotografia 17" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="17"><img src="sito_oltreilconfine/static/images/gallery/IMG_0544.JPG" alt="Fotografia 18" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="18"><img src="sito_oltreilconfine/static/images/gallery/IMG_0545.JPG" alt="Fotografia 19" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="19"><img src="sito_oltreilconfine/static/images/gallery/IMG_0546.JPG" alt="Fotografia 20" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="20"><img src="sito_oltreilconfine/static/images/gallery/IMG_0547.JPG" alt="Fotografia 21" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="21"><img src="sito_oltreilconfine/static/images/gallery/IMG_0548.JPG" alt="Fotografia 22" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="22"><img src="sito_oltreilconfine/static/images/gallery/IMG_0550.JPG" alt="Fotografia 23" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="23"><img src="sito_oltreilconfine/static/images/gallery/IMG_0551.JPG" alt="Fotografia 24" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="24"><img src="sito_oltreilconfine/static/images/gallery/IMG_0552.JPG" alt="Fotografia 25" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="25"><img src="sito_oltreilconfine/static/images/gallery/IMG_0556.JPG" alt="Fotografia 26" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="26"><img src="sito_oltreilconfine/static/images/gallery/IMG_0557.JPG" alt="Fotografia 27" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="27"><img src="sito_oltreilconfine/static/images/gallery/IMG_0559.JPG" alt="Fotografia 28" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="28"><img src="sito_oltreilconfine/static/images/gallery/IMG_0560.JPG" alt="Fotografia 29" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="29"><img src="sito_oltreilconfine/static/images/gallery/IMG_0561.JPG" alt="Fotografia 30" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="30"><img src="sito_oltreilconfine/static/images/gallery/IMG_0562.JPG" alt="Fotografia 31" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="31"><img src="sito_oltreilconfine/static/images/gallery/IMG_0563.JPG" alt="Fotografia 32" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="32"><img src="sito_oltreilconfine/static/images/gallery/IMG_0565.JPG" alt="Fotografia 33" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="33"><img src="sito_oltreilconfine/static/images/gallery/IMG_0567-1.JPG" alt="Fotografia 34" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="34"><img src="sito_oltreilconfine/static/images/gallery/IMG_0567.JPG" alt="Fotografia 35" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="35"><img src="sito_oltreilconfine/static/images/gallery/IMG_0569.JPG" alt="Fotografia 36" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="36"><img src="sito_oltreilconfine/static/images/gallery/IMG_1200.jpeg" alt="Fotografia 37" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="37"><img src="sito_oltreilconfine/static/images/gallery/IMG_1201.jpeg" alt="Fotografia 38" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="38"><img src="sito_oltreilconfine/static/images/gallery/IMG_1294.jpeg" alt="Fotografia 39" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="39"><img src="sito_oltreilconfine/static/images/gallery/IMG_1306.jpeg" alt="Fotografia 40" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="40"><img src="sito_oltreilconfine/static/images/gallery/IMG_1308.jpeg" alt="Fotografia 41" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="41"><img src="sito_oltreilconfine/static/images/gallery/IMG_1369.jpeg" alt="Fotografia 42" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="42"><img src="sito_oltreilconfine/static/images/gallery/IMG_1372.jpeg" alt="Fotografia 43" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="43"><img src="sito_oltreilconfine/static/images/gallery_2/00000IMG_00000_BURST20250622090552_COVER.jpg" alt="Fotografia 44" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="44"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084000.jpg" alt="Fotografia 45" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="45"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084030.jpg" alt="Fotografia 46" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="46"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084200.jpg" alt="Fotografia 47" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="47"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084243.jpg" alt="Fotografia 48" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="48"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084408.jpg" alt="Fotografia 49" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="49"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084716.jpg" alt="Fotografia 50" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="50"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084828_PORTRAIT.jpg" alt="Fotografia 51" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="51"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_085948.jpg" alt="Fotografia 52" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="52"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_090043.jpg" alt="Fotografia 53" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="53"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_090625.jpg" alt="Fotografia 54" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="54"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091229.jpg" alt="Fotografia 55" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="55"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091606.jpg" alt="Fotografia 56" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="56"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091723.jpg" alt="Fotografia 57" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="57"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091858.jpg" alt="Fotografia 58" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="58"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091911.jpg" alt="Fotografia 59" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="59"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092239.jpg" alt="Fotografia 60" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="60"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092301.jpg" alt="Fotografia 61" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="61"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092336.jpg" alt="Fotografia 62" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="62"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092446.jpg" alt="Fotografia 63" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="63"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092533.jpg" alt="Fotografia 64" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="64"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094215.jpg" alt="Fotografia 65" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="65"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094352.jpg" alt="Fotografia 66" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="66"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094716.jpg" alt="Fotografia 67" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="67"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094827.jpg" alt="Fotografia 68" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="68"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_095327.jpg" alt="Fotografia 69" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="69"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_095447.jpg" alt="Fotografia 70" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="70"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_095504.jpg" alt="Fotografia 71" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="71"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101052.jpg" alt="Fotografia 72" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="72"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101057.jpg" alt="Fotografia 73" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="73"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101111.jpg" alt="Fotografia 74" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="74"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101509.jpg" alt="Fotografia 75" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="75"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102401_PORTRAIT.jpg" alt="Fotografia 76" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="76"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102421.jpg" alt="Fotografia 77" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="77"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102449.jpg" alt="Fotografia 78" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="78"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102523.jpg" alt="Fotografia 79" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="79"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102525.jpg" alt="Fotografia 80" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="80"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102620.jpg" alt="Fotografia 81" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="81"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102643.jpg" alt="Fotografia 82" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="82"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102700.jpg" alt="Fotografia 83" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="83"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102813.jpg" alt="Fotografia 84" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="84"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102934.jpg" alt="Fotografia 85" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="85"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_104558.jpg" alt="Fotografia 86" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="86"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_104620.jpg" alt="Fotografia 87" loading="lazy" /></div>
+        <div class="slideshow-slide" data-index="87"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_104634.jpg" alt="Fotografia 88" loading="lazy" /></div>
+      </div><!-- /.slideshow-track -->
+    </div><!-- /.slideshow-viewport -->
+
+    <!-- Counter -->
+    <div class="slideshow-counter" aria-hidden="true">
+      <span class="slideshow-counter-current" id="sl-current">01</span>
+      <span class="slideshow-counter-sep"></span>
+      <span class="slideshow-counter-total">88 Fotografie</span>
+    </div>
+    <!-- Arrows -->
+    <button class="slideshow-arrow prev" id="sl-prev" aria-label="Immagine precedente">
+      <svg width="18" height="12" viewBox="0 0 20 14" fill="none"><path d="M19 7H1M1 7L7 1M1 7L7 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="slideshow-arrow next" id="sl-next" aria-label="Immagine successiva">
+      <svg width="18" height="12" viewBox="0 0 20 14" fill="none"><path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </button>
+    <!-- Controls -->
+    <div class="slideshow-controls" aria-label="Controlli presentazione">
+      <span class="slideshow-speed-label">Velocità</span>
+      <button class="speed-btn" data-speed="3000" aria-label="3 secondi per foto">3s</button>
+      <button class="speed-btn active" data-speed="5000" aria-label="5 secondi per foto">5s</button>
+      <button class="speed-btn" data-speed="8000" aria-label="8 secondi per foto">8s</button>
+      <button class="playpause-btn" id="sl-playpause" aria-label="Pausa presentazione">
+        <svg id="sl-pause-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+        <svg id="sl-play-icon" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M5 4l15 8-15 8V4z"/></svg>
+      </button>
+    </div>
+  </div><!-- /.slideshow-wrap -->
+
+  <!-- Thumbnail strip -->
+  <div class="thumb-strip-wrap">
+    <div class="thumb-strip-inner" id="thumb-strip" role="list" aria-label="Miniature galleria">
+      <div class="thumb-item active" data-index="0" role="listitem" tabindex="0" aria-label="Vai alla fotografia 1"><img src="sito_oltreilconfine/static/images/gallery/IMG_0517.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="1" role="listitem" tabindex="0" aria-label="Vai alla fotografia 2"><img src="sito_oltreilconfine/static/images/gallery/IMG_0518.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="2" role="listitem" tabindex="0" aria-label="Vai alla fotografia 3"><img src="sito_oltreilconfine/static/images/gallery/IMG_0519.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="3" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0520.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="4" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0522.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="5" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0526.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="6" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0527.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="7" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0528.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="8" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0535.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="9" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0536.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="10" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0537.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="11" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0538.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="12" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0539.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="13" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0540.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="14" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0541.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="15" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0542.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="16" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0543.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="17" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0544.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="18" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0545.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="19" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0546.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="20" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0547.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="21" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0548.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="22" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0550.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="23" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0551.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="24" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0552.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="25" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0556.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="26" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0557.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="27" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0559.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="28" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0560.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="29" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0561.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="30" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0562.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="31" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0563.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="32" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0565.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="33" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0567-1.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="34" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0567.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="35" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_0569.JPG" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="36" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1200.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="37" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1201.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="38" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1294.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="39" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1306.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="40" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1308.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="41" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1369.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="42" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery/IMG_1372.jpeg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="43" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/00000IMG_00000_BURST20250622090552_COVER.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="44" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084000.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="45" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084030.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="46" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084200.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="47" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084243.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="48" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084408.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="49" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084716.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="50" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_084828_PORTRAIT.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="51" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_085948.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="52" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_090043.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="53" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_090625.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="54" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091229.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="55" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091606.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="56" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091723.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="57" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091858.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="58" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_091911.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="59" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092239.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="60" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092301.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="61" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092336.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="62" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092446.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="63" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_092533.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="64" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094215.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="65" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094352.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="66" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094716.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="67" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_094827.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="68" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_095327.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="69" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_095447.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="70" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_095504.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="71" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101052.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="72" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101057.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="73" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101111.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="74" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_101509.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="75" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102401_PORTRAIT.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="76" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102421.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="77" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102449.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="78" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102523.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="79" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102525.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="80" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102620.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="81" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102643.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="82" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102700.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="83" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102813.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="84" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_102934.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="85" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_104558.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="86" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_104620.jpg" alt="" loading="lazy" /></div>
+      <div class="thumb-item" data-index="87" role="listitem" tabindex="0"><img src="sito_oltreilconfine/static/images/gallery_2/IMG_20250622_104634.jpg" alt="" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<div class="parallax-divider" aria-hidden="true" style="height:30vh;min-height:200px;">
+  <img src="sito_oltreilconfine/static/images/hero/IMG_1306.jpeg" alt="Il Carso" loading="lazy" />
+  <div class="parallax-divider-content">
+    <p class="parallax-quote reveal" style="font-size:clamp(1.2rem,2.8vw,2.2rem)">"Sono una creatura"</p>
+    <p class="parallax-quote-author reveal" data-delay="2">Giuseppe Ungaretti — Vallone, 1916</p>
+  </div>
+</div>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>Ungaretti</p>
+      <p class="footer-brand-desc">Un progetto transfrontaliero dedicato alla poesia attraverso i luoghi di Ungaretti, con il coinvolgimento delle comunità friulane, giuliane e slovene.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html#about">Il Progetto</a></li>
+        <li><a href="index.html#locandine">Locandine</a></li>
+        <li><a href="index.html#phases">Fasi</a></li>
+        <li><a href="galleria.html">Galleria</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+        <li><a href="#">Cikale Operose APS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Oltreconfine Ungaretti · Finanziato dalla <a href="#">Regione Friuli Venezia Giulia</a> · <a href="#">Go!2025</a></p>
+    <p class="footer-tag">Gorizia &amp; Nova Gorica · Capitale Europea della Cultura</p>
+  </div>
+</footer>
+
+<script src="sito_oltreilconfine/static/js/main.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  const TOTAL=88,track=document.getElementById('slideshow-track'),progressEl=document.getElementById('slideshow-progress'),currentEl=document.getElementById('sl-current'),thumbStrip=document.getElementById('thumb-strip'),prevBtn=document.getElementById('sl-prev'),nextBtn=document.getElementById('sl-next'),ppBtn=document.getElementById('sl-playpause'),pauseIcon=document.getElementById('sl-pause-icon'),playIcon=document.getElementById('sl-play-icon'),speedBtns=document.querySelectorAll('.speed-btn'),thumbs=document.querySelectorAll('.thumb-item'),slides=document.querySelectorAll('.slideshow-slide');
+  if(!track||TOTAL===0)return;
+  let current=0,isPlaying=true,interval=null,speed=5000;
+  function pad(n){return String(n+1).padStart(2,'0');}
+  function updateSlide(idx){
+    idx=((idx%TOTAL)+TOTAL)%TOTAL;
+    track.style.transform=`translateX(-${idx*100}%)`;
+    slides.forEach((s,i)=>s.classList.toggle('active',i===idx));
+    if(currentEl)currentEl.textContent=pad(idx);
+    thumbs.forEach((t,i)=>t.classList.toggle('active',i===idx));
+    const th=thumbs[idx];
+    if(th&&thumbStrip){const sr=thumbStrip.getBoundingClientRect(),tr=th.getBoundingClientRect();thumbStrip.scrollTo({left:tr.left-sr.left+thumbStrip.scrollLeft-sr.width/2+tr.width/2,behavior:'smooth'});}
+    current=idx;resetProgress();
+  }
+  function resetProgress(){
+    if(!progressEl)return;
+    progressEl.classList.remove('animating');progressEl.style.width='0%';
+    if(!isPlaying)return;
+    requestAnimationFrame(()=>{progressEl.classList.add('animating');progressEl.style.transitionDuration=speed+'ms';progressEl.style.width='100%';});
+  }
+  function startAutoplay(){stopAutoplay();resetProgress();interval=setInterval(()=>updateSlide(current+1),speed);}
+  function stopAutoplay(){if(interval){clearInterval(interval);interval=null;}if(progressEl){progressEl.classList.remove('animating');progressEl.style.transitionDuration='0ms';}}
+  function togglePlay(){
+    isPlaying=!isPlaying;
+    if(pauseIcon)pauseIcon.style.display=isPlaying?'':'none';
+    if(playIcon)playIcon.style.display=isPlaying?'none':'';
+    if(ppBtn)ppBtn.setAttribute('aria-label',isPlaying?'Pausa presentazione':'Avvia presentazione');
+    isPlaying?startAutoplay():stopAutoplay();
+  }
+  if(prevBtn)prevBtn.addEventListener('click',()=>{updateSlide(current-1);if(isPlaying)startAutoplay();});
+  if(nextBtn)nextBtn.addEventListener('click',()=>{updateSlide(current+1);if(isPlaying)startAutoplay();});
+  if(ppBtn)ppBtn.addEventListener('click',togglePlay);
+  thumbs.forEach((th,i)=>{th.addEventListener('click',()=>{updateSlide(i);if(isPlaying)startAutoplay();});th.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();th.click();}});});
+  speedBtns.forEach(btn=>{btn.addEventListener('click',()=>{speed=parseInt(btn.dataset.speed,10);speedBtns.forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(isPlaying)startAutoplay();});});
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){updateSlide(current-1);if(isPlaying)startAutoplay();}if(e.key==='ArrowRight'){updateSlide(current+1);if(isPlaying)startAutoplay();}if(e.key===' '&&document.activeElement.tagName!=='BUTTON'){e.preventDefault();togglePlay();}});
+  const vp=document.getElementById('slideshow-viewport');
+  if(vp){let tx=0;vp.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX;},{passive:true});vp.addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].screenX;if(Math.abs(d)>50){updateSlide(d>0?current+1:current-1);if(isPlaying)startAutoplay();}},{passive:true});}
+  const wrap=document.querySelector('.slideshow-wrap');
+  if(wrap){wrap.addEventListener('mouseenter',()=>{if(isPlaying)stopAutoplay();});wrap.addEventListener('mouseleave',()=>{if(isPlaying){resetProgress();interval=setInterval(()=>updateSlide(current+1),speed);}});}
+  updateSlide(0);startAutoplay();
+})();
+</script>
+</body>
+</html>

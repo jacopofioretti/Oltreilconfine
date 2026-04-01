@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rassegna Stampa — Oltreconfine Ungaretti" />
+  <meta property="og:title" content="Rassegna Stampa — Oltreconfine Ungaretti" />
+  <meta name="theme-color" content="#0c0a08" />
+  <title>Rassegna Stampa — Oltreconfine Ungaretti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="sito_oltreilconfine/static/css/style.css?v=1.4" />
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html#hero" class="nav-logo" aria-label="Torna alla homepage">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">Ungaretti · 1914–1919</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#about">Il Progetto</a></li>
+    <li><a href="index.html#locandine">Locandine</a></li>
+    <li><a href="index.html#phases">Fasi</a></li>
+    <li><a href="index.html#gallery">Galleria</a></li>
+    <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html#about">Il Progetto</a>
+  <a href="index.html#locandine">Locandine</a>
+  <a href="index.html#phases">Fasi</a>
+  <a href="index.html#gallery">Galleria</a>
+  <a href="rassegna-stampa.html">Rassegna Stampa</a>
+  <a href="index.html#contact">Contatti</a>
+</div>
+
+<!-- PDF MODAL -->
+<div class="pdf-modal" id="pdf-modal" role="dialog" aria-modal="true" aria-label="Visualizzatore PDF">
+  <div class="pdf-modal-header">
+    <span class="pdf-modal-title" id="pdf-modal-title"></span>
+    <div class="pdf-modal-actions">
+      <a class="pdf-modal-download" id="pdf-modal-download" href="#" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Scarica
+      </a>
+      <button class="pdf-modal-close" id="pdf-modal-close" aria-label="Chiudi visualizzatore">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="pdf-modal-body">
+    <iframe id="pdf-modal-iframe" title="Visualizzatore PDF" src="" allow="fullscreen"></iframe>
+  </div>
+</div>
+
+<!-- RASSEGNA STAMPA -->
+<section class="rassegna-stampa" id="rassegna-stampa" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 0;">
+  <div class="section-inner" style="max-width: 800px; width: 100%; text-align: center;">
+    <div class="reveal">
+      <p class="section-label">Rassegna Stampa</p>
+      <h2 class="section-title" data-delay="1"><em>Rassegna Stampa</em></h2>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="locandina-card reveal" data-delay="1"
+           role="button" tabindex="0"
+           aria-label="Apri rassegna stampa"
+           onclick="openPdfModal('sito_oltreilconfine/static/images/hero/Oltreconfine%20Ungaretti_Rassegna%20stampa.pdf', 'Rassegna Stampa — Oltreconfine Ungaretti')"
+           style="max-width: 400px; width: 100%;">
+        <div class="locandina-thumb">
+          <img src="sito_oltreilconfine/static/images/hero/ungaretti-copia.jpeg" alt="Rassegna Stampa — Anteprima" loading="lazy" style="object-fit: cover; height: 500px;" />
+          <div class="locandina-overlay"><span class="locandina-overlay-label">Apri &amp; Visualizza</span></div>
+        </div>
+        <div class="locandina-info">
+          <p class="locandina-num">Rassegna 01</p>
+          <h3 class="locandina-title">Rassegna Stampa Completa</h3>
+          <p class="locandina-subtitle">Articoli e recensioni sul progetto</p>
+          <div class="locandina-actions">
+            <button class="locandina-btn locandina-btn-primary"
+                    onclick="event.stopPropagation(); openPdfModal('sito_oltreilconfine/static/images/hero/Oltreconfine%20Ungaretti_Rassegna%20stampa.pdf', 'Rassegna Stampa — Oltreconfine Ungaretti')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              Visualizza
+            </button>
+            <a class="locandina-btn" href="sito_oltreilconfine/static/images/hero/Oltreconfine%20Ungaretti_Rassegna%20stampa.pdf" download="Rassegna-Stampa-Oltreconfine-Ungaretti.pdf" onclick="event.stopPropagation()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Scarica PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>Ungaretti</p>
+      <p class="footer-brand-desc">Un progetto transfrontaliero dedicato alla poesia attraverso i luoghi di Ungaretti, con il coinvolgimento delle comunità friulane, giuliane e slovene.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html#about">Il Progetto</a></li>
+        <li><a href="index.html#locandine">Locandine</a></li>
+        <li><a href="index.html#phases">Fasi</a></li>
+        <li><a href="galleria.html">Galleria</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+        <li><a href="#">Cikale Operose APS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Oltreconfine Ungaretti · Finanziato dalla <a href="#">Regione Friuli Venezia Giulia</a> · <a href="#">Go!2025</a></p>
+    <p class="footer-tag">Gorizia &amp; Nova Gorica · Capitale Europea della Cultura</p>
+  </div>
+</footer>
+
+<script src="sito_oltreilconfine/static/js/main.js" defer></script>
+</body>
+</html>

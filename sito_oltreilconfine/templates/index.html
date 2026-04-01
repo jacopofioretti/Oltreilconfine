@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.4" />
 </head>
 <body>
 
@@ -36,17 +36,31 @@
      NAVIGATION
 ════════════════════════════════════════════ -->
 <nav class="nav" role="navigation" aria-label="Menu principale">
+  {% if show_rassegna_only %}
+  <a href="{% url 'sito_oltreilconfine:home' %}#hero" class="nav-logo" aria-label="Torna alla homepage">
+  {% else %}
   <a href="#hero" class="nav-logo" aria-label="Torna in cima">
+  {% endif %}
     <span class="nav-logo-main">Oltreconfine</span>
     <span class="nav-logo-sub">Ungaretti · 1914–1919</span>
   </a>
 
   <ul class="nav-links" role="list">
+    {% if show_rassegna_only %}
+    <li><a href="{% url 'sito_oltreilconfine:home' %}#about">Il Progetto</a></li>
+    <li><a href="{% url 'sito_oltreilconfine:home' %}#locandine">Locandine</a></li>
+    <li><a href="{% url 'sito_oltreilconfine:home' %}#phases">Fasi</a></li>
+    <li><a href="{% url 'sito_oltreilconfine:home' %}#gallery">Galleria</a></li>
+    <li><a href="{% url 'sito_oltreilconfine:rassegna_stampa' %}">Rassegna Stampa</a></li>
+    <li><a href="{% url 'sito_oltreilconfine:home' %}#contact" class="nav-cta">Contatti</a></li>
+    {% else %}
     <li><a href="#about">Il Progetto</a></li>
     <li><a href="#locandine">Locandine</a></li>
     <li><a href="#phases">Fasi</a></li>
     <li><a href="#gallery">Galleria</a></li>
+    <li><a href="{% url 'sito_oltreilconfine:rassegna_stampa' %}">Rassegna Stampa</a></li>
     <li><a href="#contact" class="nav-cta">Contatti</a></li>
+    {% endif %}
   </ul>
 
   <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
@@ -56,13 +70,24 @@
 
 <!-- Mobile nav overlay -->
 <div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  {% if show_rassegna_only %}
+  <a href="{% url 'sito_oltreilconfine:home' %}#about">Il Progetto</a>
+  <a href="{% url 'sito_oltreilconfine:home' %}#locandine">Locandine</a>
+  <a href="{% url 'sito_oltreilconfine:home' %}#phases">Fasi</a>
+  <a href="{% url 'sito_oltreilconfine:home' %}#gallery">Galleria</a>
+  <a href="{% url 'sito_oltreilconfine:rassegna_stampa' %}">Rassegna Stampa</a>
+  <a href="{% url 'sito_oltreilconfine:home' %}#contact">Contatti</a>
+  {% else %}
   <a href="#about">Il Progetto</a>
   <a href="#locandine">Locandine</a>
   <a href="#phases">Fasi</a>
   <a href="#gallery">Galleria</a>
+  <a href="{% url 'sito_oltreilconfine:rassegna_stampa' %}">Rassegna Stampa</a>
   <a href="#contact">Contatti</a>
+  {% endif %}
 </div>
 
+{% if not show_rassegna_only %}
 <!-- ════════════════════════════════════════════
      HERO
 ════════════════════════════════════════════ -->
@@ -190,7 +215,7 @@
     Percorso: {% static 'images/hero/carso-landscape.jpg' %}
   -->
   <img
-    src="https://images.unsplash.com/photo-1504884790557-80daa3a9e621?w=1600&q=75"
+    src="{% static 'images/hero/IMG_1306.jpeg' %}"
     alt="Il Carso nella Grande Guerra"
     loading="lazy"
   />
@@ -332,6 +357,7 @@
 
   </div><!-- /.section-inner -->
 </section>
+{% endif %}
 
 <!-- ════════════════════════════════════════════
      PDF MODAL VIEWER
@@ -354,6 +380,64 @@
   </div>
 </div>
 
+{% if show_rassegna_only %}
+<!-- ════════════════════════════════════════════
+     RASSEGNA STAMPA
+════════════════════════════════════════════ -->
+<section class="rassegna-stampa" id="rassegna-stampa" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 4rem 0;">
+  <div class="section-inner" style="max-width: 800px; width: 100%; text-align: center;">
+    <div class="reveal">
+      <p class="section-label">Rassegna Stampa</p>
+      <h2 class="section-title" data-delay="1">
+        <em>Rassegna Stampa</em>
+      </h2>
+    </div>
+    
+    <!-- ── Rassegna Card Centrata ── -->
+    <div style="display: flex; justify-content: center;">
+      <div class="locandina-card reveal" data-delay="1"
+           role="button" tabindex="0"
+           aria-label="Apri rassegna stampa"
+           onclick="openPdfModal('{% static 'images/hero/Oltreconfine Ungaretti_Rassegna stampa.pdf' %}', 'Rassegna Stampa — Oltreconfine Ungaretti')"
+           style="max-width: 400px; width: 100%;">
+        <div class="locandina-thumb">
+          <img 
+            src="{% static 'images/hero/ungaretti-copia.jpeg' %}" 
+            alt="Rassegna Stampa — Anteprima" 
+            loading="lazy"
+            style="object-fit: cover; height: 500px;"
+          />
+          <div class="locandina-overlay">
+            <span class="locandina-overlay-label">Apri &amp; Visualizza</span>
+          </div>
+        </div>
+        <div class="locandina-info">
+          <p class="locandina-num">Rassegna 01</p>
+          <h3 class="locandina-title">Rassegna Stampa Completa</h3>
+          <p class="locandina-subtitle">Articoli e recensioni sul progetto</p>
+          <div class="locandina-actions">
+            <button class="locandina-btn locandina-btn-primary"
+                    onclick="event.stopPropagation(); openPdfModal('{% static 'images/hero/Oltreconfine Ungaretti_Rassegna stampa.pdf' %}', 'Rassegna Stampa — Oltreconfine Ungaretti')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              Visualizza
+            </button>
+            <a class="locandina-btn"
+               href="{% static 'images/hero/Oltreconfine Ungaretti_Rassegna stampa.pdf' %}"
+               download="Rassegna-Stampa-Oltreconfine-Ungaretti.pdf"
+               onclick="event.stopPropagation()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Scarica PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.section-inner -->
+</section>
+{% endif %}
+
+{% if not show_rassegna_only %}
 <!-- ════════════════════════════════════════════
      FASI DEL PROGETTO
 ════════════════════════════════════════════ -->
@@ -405,10 +489,20 @@
 ════════════════════════════════════════════ -->
 <section class="gallery" id="gallery">
   <div class="section-inner" style="padding-bottom: 2rem;">
-    <p class="section-label reveal">Immagini</p>
-    <h2 class="section-title reveal" data-delay="1">
-      I <em>Luoghi</em> di Ungaretti
-    </h2>
+    <div class="reveal" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1rem;">
+      <div>
+        <p class="section-label">Immagini</p>
+        <h2 class="section-title" data-delay="1">
+          I <em>Luoghi</em> di Ungaretti
+        </h2>
+      </div>
+      <a href="{% url 'sito_oltreilconfine:galleria' %}" class="btn reveal" data-delay="2" style="margin-bottom: 0.5rem;">
+        <span>Vedi tutte</span>
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M1 5H15M15 5L11 1M15 5L11 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
   </div>
 
   <div class="gallery-track-wrap">
@@ -419,36 +513,133 @@
         Cartella: {% static 'images/gallery/' %}
       -->
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1562260967-31aba6614e7e?w=600&q=75" alt="Il Carso" loading="lazy" />
-        <span class="gallery-img-caption">Il Carso</span>
+        <img src="{% static 'images/gallery/IMG_0517.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=600&q=75" alt="Monte San Michele" loading="lazy" />
-        <span class="gallery-img-caption">Monte San Michele</span>
+        <img src="{% static 'images/gallery/IMG_0518.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=600&q=75" alt="Paesaggio friulano" loading="lazy" />
-        <span class="gallery-img-caption">Friuli Venezia Giulia</span>
+        <img src="{% static 'images/gallery/IMG_0519.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?w=600&q=75" alt="Teatro all'aperto" loading="lazy" />
-        <span class="gallery-img-caption">Serata letteraria</span>
+        <img src="{% static 'images/gallery/IMG_0520.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?w=600&q=75" alt="Gorizia" loading="lazy" />
-        <span class="gallery-img-caption">Gorizia</span>
+        <img src="{% static 'images/gallery/IMG_0522.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=75" alt="Territorio" loading="lazy" />
-        <span class="gallery-img-caption">Il Territorio</span>
+        <img src="{% static 'images/gallery/IMG_0526.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1533104816931-20fa691ff6ca?w=600&q=75" alt="Archivio storico" loading="lazy" />
-        <span class="gallery-img-caption">Memoria storica</span>
+        <img src="{% static 'images/gallery/IMG_0527.JPG' %}" alt="Il Carso" loading="lazy" />
       </div>
       <div class="gallery-img" role="listitem">
-        <img src="https://images.unsplash.com/photo-1548802673-380ab8ebc7b7?w=600&q=75" alt="Confine" loading="lazy" />
-        <span class="gallery-img-caption">Oltre il confine</span>
+        <img src="{% static 'images/gallery/IMG_0528.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0535.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0536.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0537.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0538.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0539.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0540.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0541.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0542.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0543.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0544.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0545.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0546.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0547.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0548.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0550.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0551.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0552.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0556.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0557.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0559.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0560.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0561.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0562.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0563.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0565.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0567-1.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0567.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_0569.JPG' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1200.jpeg' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1201.jpeg' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1294.jpeg' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1306.jpeg' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1308.jpeg' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1369.jpeg' %}" alt="Il Carso" loading="lazy" />
+      </div>
+      <div class="gallery-img" role="listitem">
+        <img src="{% static 'images/gallery/IMG_1372.jpeg' %}" alt="Il Carso" loading="lazy" />
       </div>
     </div>
   </div>
@@ -631,6 +822,7 @@
     <p class="footer-tag">Gorizia &amp; Nova Gorica · Capitale Europea della Cultura</p>
   </div>
 </footer>
+{% endif %}
 
 <!-- ── Scripts ─────────────────────────────── -->
 <script src="{% static 'js/main.js' %}" defer></script>
