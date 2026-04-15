@@ -83,9 +83,21 @@
     });
     mobileMenu.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
+        // Don't close if it's a dropdown toggle
+        if (a.classList.contains('nav-mobile-dropdown-toggle')) {
+          return;
+        }
         burger.classList.remove('open');
         mobileMenu.classList.remove('open');
         document.body.style.overflow = '';
+      });
+    });
+    // Mobile dropdown toggles
+    mobileMenu.querySelectorAll('.nav-mobile-dropdown-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dropdown = toggle.closest('.nav-mobile-dropdown');
+        dropdown.classList.toggle('open');
       });
     });
   }

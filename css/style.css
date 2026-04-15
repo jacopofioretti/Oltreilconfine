@@ -172,6 +172,63 @@ body::before {
 }
 .nav-links .nav-cta::after { display: none; }
 
+/* Dropdown menu */
+.nav-dropdown {
+  position: relative;
+}
+.nav-dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav-dropdown-arrow {
+  font-size: 0.6rem;
+  transition: transform 0.3s;
+}
+.nav-dropdown:hover .nav-dropdown-arrow {
+  transform: rotate(180deg);
+}
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  min-width: 200px;
+  padding: 0.5rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1000;
+}
+.nav-dropdown:hover .nav-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+.nav-dropdown-menu li {
+  list-style: none;
+}
+.nav-dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.65);
+  transition: color 0.3s, background 0.3s;
+  white-space: nowrap;
+}
+.nav-dropdown-menu a:hover {
+  color: var(--gold-light);
+  background: rgba(255,255,255,0.05);
+}
+.nav-dropdown-menu a::after {
+  display: none;
+}
+
 /* Hamburger */
 .nav-burger {
   display: none;
@@ -225,6 +282,41 @@ body::before {
 .nav-mobile.open a:nth-child(3) { transition-delay: 0.2s; }
 .nav-mobile.open a:nth-child(4) { transition-delay: 0.25s; }
 .nav-mobile a:hover { color: var(--gold-light); }
+
+/* Mobile dropdown */
+.nav-mobile-dropdown {
+  margin: 1rem 0;
+}
+.nav-mobile-dropdown-toggle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--parchment);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), color 0.3s;
+}
+.nav-mobile.open .nav-mobile-dropdown-toggle {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.25s;
+}
+.nav-mobile-dropdown-menu {
+  display: none;
+  margin-top: 1rem;
+  padding-left: 2rem;
+}
+.nav-mobile-dropdown.open .nav-mobile-dropdown-menu {
+  display: block;
+}
+.nav-mobile-dropdown-menu a {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  margin-bottom: 0.5rem;
+  opacity: 1;
+  transform: none;
+}
 
 /* ════════════════════════════════════════
    HERO

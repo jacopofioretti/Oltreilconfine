@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Note Artistiche — Un progetto per tenere vivi i fatti attraverso il mondo dei vissuti e della gente comune." />
+  <meta property="og:title" content="Note Artistiche" />
+  <meta property="og:description" content="Tenere vivi i fatti attraverso il mondo dei vissuti e quindi della gente comune." />
+  <meta name="theme-color" content="#0c0a08" />
+  <title>Note Artistiche</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=1.4" />
+</head>
+<body>
+
+<!-- ── Loader ───────────────────────────────── -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar">
+    <div class="loader-progress" id="loader-progress"></div>
+  </div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+
+<!-- ── Custom Cursor ────────────────────────── -->
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html" class="nav-logo" aria-label="Torna alla home">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">Note Artistiche</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">Il Progetto</a></li>
+    <li><a href="index.html#gallery">Galleria</a></li>
+    <li class="nav-dropdown">
+      <a href="oltreilconfine-1918-2018.html" class="nav-dropdown-toggle">Oltre il confine <span class="nav-dropdown-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#contact">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html">Home</a>
+  <a href="index.html#about">Il Progetto</a>
+  <a href="index.html#gallery">Galleria</a>
+  <div class="nav-mobile-dropdown">
+    <a href="oltreilconfine-1918-2018.html" class="nav-mobile-dropdown-toggle">Oltre il confine ▼</a>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a>
+      <a href="memoria.html">Memoria</a>
+      <a href="note-artistiche.html">Note Artistiche</a>
+    </div>
+  </div>
+  <a href="index.html#contact">Contatti</a>
+</div>
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero" id="hero" aria-label="Sezione principale">
+  <div class="hero-bg" id="hero-bg">
+    <img
+      src="assets/hero/ungaretti-copia.jpeg"
+      alt="Paesaggio del Carso friulano al tramonto"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Progetto Culturale</p>
+    <h1 class="hero-title">Note <em>Artistiche</em></h1>
+    <div class="hero-verse" style="margin-bottom: 2rem;">
+      <blockquote>Espressione e Memoria</blockquote>
+      <cite>Attraverso l'arte</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CONTENT
+════════════════════════════════════════════ -->
+<section class="about" id="content">
+  <div class="section-inner" style="max-width: none; padding: 4rem 5rem;">
+    <p class="section-label reveal">Note Artistiche</p>
+    <h2 class="section-title reveal" data-delay="1">Espressione e <em>Memoria</em></h2>
+    <div class="reveal" data-delay="2">
+      <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2rem; align-items: start; margin-bottom: 1.5rem;">
+        <div style="text-align: justify; line-height: 1.6;">
+          <p>Tenere vivi i fatti attraverso il mondo dei vissuti e quindi della gente comune è il grande merito di questo progetto, che agisce sulla doppia dimensione storica e di consapevolezza. Molte persone sono state coinvolte, con il proprio vissuto, con le proprie memorie dirette. Un progetto che sta riuscendo a far emergere una storia quotidiana fatta di persone e di luoghi, di relazioni e di vicende che sono alla base del nostro essere attuale e del territorio per come ora lo conosciamo.</p>
+          
+          <p>&nbsp;</p>
+          
+          <p><strong>Francesco Martines, Sindaco di Palmanova</strong></p>
+          
+          <p><strong>Adriana Danielis, Vicesindaco di Palmanova</strong></p>
+          
+          <p><em>(Palmanova è Comune capofila del progetto)</em></p>
+        </div>
+        <div style="text-align: center; position: sticky; top: 2rem;">
+          <img src="assets/soldiers.jpg" alt="Soldati al fronte" loading="lazy" style="max-width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
+          <p class="about-caption" style="margin-top: 0.3rem; font-size: 0.65rem; color: var(--text-muted); line-height: 1.2; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">Soldati al fronte durante la Grande Guerra</p>
+        </div>
+      </div>
+      <div style="text-align: justify; line-height: 1.6;">
+        <p>OLTRECONFINE ha saputo finora confermare e moltiplicare una rete di legami tra persone andando oltre la tendenza imperante all'egocentrismo e al solipsismo, valorizzando le individualità in un viaggio che ci restituisce un bene comune non solo in senso strettamente storico ma in quello ben più ampio dell'esperienza culturale e umana. Raccogliere, valorizzare e rendere comune un patrimonio di storie nel rispetto storico del punto vista italiano e austriaco contribuisce alla costruzione di una coscienza e di una cultura europea.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p><strong>Francesco Accomando, Direttore Artistico Oltreconfine</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>Note Artistiche</p>
+      <p class="footer-brand-desc">Un progetto per tenere vivi i fatti attraverso il mondo dei vissuti e della gente comune.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">Il Progetto</a></li>
+        <li><a href="index.html#gallery">Galleria</a></li>
+        <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Oltre il confine</p>
+      <ul class="footer-links">
+        <li><a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+        <li><a href="#">Archivio</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+        <li><a href="#">Cikale Operose APS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Oltreconfine Note Artistiche · Progetto culturale Cikale Operose</p>
+    <p class="footer-tag">Friuli Venezia Giulia · Memoria della Grande Guerra</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

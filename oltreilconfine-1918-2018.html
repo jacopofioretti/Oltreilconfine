@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Oltre il confine 1918/2018 — Progetto culturale sulla Grande Guerra nei territori del Friuli Venezia Giulia." />
+  <meta property="og:title" content="Oltre il confine 1918/2018" />
+  <meta property="og:description" content="Un percorso culturale partecipato che racconta storie di uomini e donne all'epoca della Grande Guerra." />
+  <meta name="theme-color" content="#0c0a08" />
+  <title>Oltre il confine 1918/2018</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=1.4" />
+</head>
+<body>
+
+<!-- ── Loader ───────────────────────────────── -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar">
+    <div class="loader-progress" id="loader-progress"></div>
+  </div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+
+<!-- ── Custom Cursor ────────────────────────── -->
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html" class="nav-logo" aria-label="Torna alla home">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">1918/2018</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#about">Il Progetto</a></li>
+    <li><a href="index.html#gallery">Galleria</a></li>
+    <li class="nav-dropdown">
+      <a href="oltreilconfine-1918-2018.html" class="nav-dropdown-toggle">Oltre il confine <span class="nav-dropdown-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#contact">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav overlay -->
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html">Home</a>
+  <a href="index.html#about">Il Progetto</a>
+  <a href="index.html#gallery">Galleria</a>
+  <div class="nav-mobile-dropdown">
+    <a href="oltreilconfine-1918-2018.html" class="nav-mobile-dropdown-toggle">Oltre il confine ▼</a>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a>
+      <a href="memoria.html">Memoria</a>
+      <a href="note-artistiche.html">Note Artistiche</a>
+    </div>
+  </div>
+  <a href="index.html#contact">Contatti</a>
+</div>
+
+<!-- ════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="hero" id="hero" aria-label="Sezione principale">
+  <div class="hero-bg" id="hero-bg">
+    <img
+      src="assets/hero/ungaretti-copia.jpeg"
+      alt="Paesaggio del Carso friulano al tramonto"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Progetto Culturale</p>
+    <h1 class="hero-title">Oltre il <em>confine</em></h1>
+    <div class="hero-verse" style="margin-bottom: 2rem;">
+      <blockquote>1918/2018</blockquote>
+      <cite>Un secolo di memoria condivisa</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     CONTENT
+════════════════════════════════════════════ -->
+<section class="about" id="content">
+  <div class="section-inner" style="max-width: none; padding: 4rem 5rem;">
+    <p class="section-label reveal">Il Progetto</p>
+    <h2 class="section-title reveal" data-delay="1">Oltre il <em>confine</em><br>1918/2018</h2>
+    <div class="reveal" data-delay="2">
+      <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2rem; align-items: start; margin-bottom: 1.5rem;">
+        <div style="text-align: justify; line-height: 1.6;">
+          <p>Dai fatti di Caporetto dell'autunno 1917, con l'arrivo o il ritorno delle truppe austro-ungariche e tedesche, passando per il rovesciamento del fronte e l'armistizio del 4 novembre 1918, fino all'annessione del 1920. È questo l'arco temporale che la terza edizione di <strong>OLTRECONFINE</strong> percorre nell'anno del centenario della sospirata conclusione di una guerra che si è abbattuta con una violenza brutale sulle aree dei 17 Comuni partecipanti. In ogni Comune viene organizzata una serata-forum pubblica con gli interventi di oltre 20 esperti di storia locale e del direttore artistico nelle vesti di attore, che reciterà alcuni brani tratti da testimonianze. Alle serate sono invitati a contribuire le associazioni, le scuole, i gruppi musicali e i cittadini con suggestioni, ricordi familiari, notizie e memorie indirette.</p>
+          
+          <p>"Il progetto intende raccontare storie di uomini e donne, di città e paesi all'epoca della Grande Guerra nell'idea di recuperare brandelli di storia, anche volutamente o inconsapevolmente dimenticati – evidenzia Giampaolo Fioretti, presidente dell'associazione <strong>Cikale Operose</strong> che cura OLTRECONFINE – Per questo cercheremo di coinvolgere, per il terzo anno, associazioni e famiglie nella raccolta di memorie, documenti, diari, fotografie, oggetti legati alla memoria della Grande Guerra".</p>
+          
+          <p><strong>OLTRECONFINE</strong> è un progetto culturale partecipato, con un percorso crescente dal basso che coinvolge i cittadini, le associazioni e le scuole di 17 Comuni del FVG: Palmanova (capofila) e Aiello del Friuli, Bagnaria Arsa, Bicinicco, Campolongo Tapogliano, Castions di Strada, Chiopris Viscone, Gonars, Medea, Romans d'Isonzo, Ruda, San Vito al Torre, Santa Maria La Longa, Torviscosa, Trivignano Udinese, Villesse, Visco. Tutti territori che, nel 1915, si trovarono "presi in mezzo" dalla guerra, essendo a ridosso o sul confine tra l'Impero Austro-Ungarico e il Regno d'Italia.</p>
+        </div>
+        <div style="text-align: center; position: sticky; top: 2rem;">
+          <img src="assets/truppe-al-fronte-300x197.jpg" alt="Palmanova. Fanti italiani escono da Porta Cividale verso il fronte" loading="lazy" style="max-width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
+          <p class="about-caption" style="margin-top: 0.3rem; font-size: 0.65rem; color: var(--text-muted); line-height: 1.2; max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;">Palmanova. Fanti italiani escono da Porta Cividale verso il fronte (fotografia concessa da Giuseppe Muradore)</p>
+        </div>
+      </div>
+      <div style="text-align: justify; line-height: 1.6;">
+        <p>Anche quest'anno il percorso sarà guidato dal regista <strong>Francesco Accomando</strong>, con la direzione organizzativa di Giampaolo Fioretti e dell'Associazione <strong>Cikale Operose</strong> e la collaborazione di Giovanni Russo.</p>
+        
+        <p>Il format mantiene la struttura dello scorso anno con un numero maggiore di incontri in relazione alle nuove comunità coinvolte. La prima parte di <strong>OLTRECONFINE</strong> si articola dunque in <strong>17 serate-forum</strong> animate dallo stesso Francesco Accomando e da storici locali che accompagneranno le comunità locali nella ricostruzione del periodo che va dall'estate del 1915 fino ai giorni successivi ai fatti di Caporetto, anche grazie ai racconti e alle testimonianze dirette di tutti i cittadini che hanno qualcosa da raccontare sulla storia della propria famiglia, su fatti conosciuti e mai raccontati, ovvero che hanno nel proprio cassetto una memoria da mostrare alla comunità.</p>
+        
+        <p>Nella seconda fase del progetto <strong>OLTRECONFINE</strong> prenderà avvio il lavoro con le espressioni del territorio, le associazioni e i cittadini che vorranno prendere parte liberamente alla realizzazione di un montaggio drammaturgico da rappresentare nel periodo estivo nei diversi Comuni a partire da giugno.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p><strong>COS'È OLTRECONFINE</strong></p>
+        
+        <p>OLTRECONFINE è un progetto culturale sulla Grande Guerra ed è nato dall'esigenza di creare, in un'area che era attraversata da un confine, un immaginario storico, comune e condiviso, di alcuni avvenimenti significativi nella pluralità dei punti di vista e nel superamento di alcune distorsioni, mistificazioni e manomissioni intercorse negli anni successivi.</p>
+        
+        <p>Gli obiettivi sono:</p>
+        
+        <p>1.raccogliere un patrimonio di storie emblematiche nel rispetto storico del doppio punto vista italiano e austriaco;</p>
+        
+        <p>2.valorizzare e rendere comune questo patrimonio storico attraverso la realizzazione di un laboratorio teatrale itinerante e di un evento conclusivo di teatro che sarà presentato in ognuno dei Comuni partecipanti in un luogo all'aperto diverso e significativo;</p>
+        
+        <p>3.contribuire alla costruzione di una coscienza e di una cultura europea dei territori volte al superamento dei contrasti, dei conflitti e dell'idea stessa di confine.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p><strong>QUALI SONO GLI OBIETTIVI</strong></p>
+        
+        <p>Il progetto intende raccontare storie di uomini e donne, di città e paesi all'epoca della Grande Guerra nell'idea di recuperare brandelli di storia, anche volutamente o inconsapevolmente dimenticati. Si guarderà però anche all'oggi, nella consapevolezza di una memoria storica che cerchi di comprendere altri conflitti e altri confini che oggi si presentano sul nostro orizzonte; saper guardare con gli occhi della storia a quei fenomeni epocali, a quelle tensioni politiche e culturali, locali, nazionali e internazionali, che si dovranno superare, per arrivare a ricucire strappi e a rafforzare una cultura della pace e della convivenza sulla strada della costruzione di una vera Europa dei popoli e dei cittadini.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p><strong>MODALITÀ</strong></p>
+        
+        <p>L'idea di fondo nella modalità di realizzazione del progetto è la costruzione di un processo partecipato, crescente dal basso coinvolgendo i cittadini e le associazioni di ogni Comune partecipante secondo un processo per fasi di lavoro, portando dalle singole realtà locali alla formazione di un gruppo di lavoro unico. Questo gruppo raccoglierà ed elaborerà i materiali storici di tutti i territori e procederà, infine, sotto la guida del direttore artistico del progetto, alla definizione e realizzazione di un evento teatrale finale itinerante che restituirà a tutti i territori un messaggio comune di cittadinanza. L'evento finale avrà alla base un lavoro comune definito dal risultato artistico del gruppo itinerante che verrà poi adattato allo specifico e diverso luogo di realizzazione in ogni Comune.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     LOGHI COMUNI
+════════════════════════════════════════════ -->
+<section class="partners">
+  <div class="section-inner" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <p class="section-label reveal" style="justify-content: center;">Comuni Partecipanti</p>
+    <div class="partners-grid reveal" data-delay="1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 2rem; align-items: center; justify-items: center;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/palmanova-150x150.jpg" alt="Comune di Palmanova" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Palmanova</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/aiello-150x150.jpg" alt="Comune di Aiello del Friuli" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Aiello del Friuli</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Bagnaria_Arsa-150x150.png" alt="Comune di Bagnaria Arsa" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Bagnaria Arsa</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Bicinicco-150x150.png" alt="Comune di Bicinicco" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Bicinicco</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Campolongo_Tapogliano-150x150.png" alt="Comune di Campolongo Tapogliano" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Campolongo Tapogliano</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Castions_di_Strada-150x150.png" alt="Comune di Castions di Strada" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Castions di Strada</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Chiopris-Viscone-150x150.png" alt="Comune di Chiopris Viscone" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Chiopris Viscone</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Gonars-150x150.jpg" alt="Comune di Gonars" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Gonars</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Medea-150x150.png" alt="Comune di Medea" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Medea</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Romans_dIsonzo-150x150.png" alt="Comune di Romans d'Isonzo" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Romans d'Isonzo</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Ruda-123x150.jpg" alt="Comune di Ruda" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Ruda</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/San_Vito_al_Torre-150x150.png" alt="Comune di San Vito al Torre" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">San Vito al Torre</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Santa_Maria_la_Longa-150x150.png" alt="Comune di Santa Maria La Longa" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Santa Maria La Longa</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Torviscosa-150x150.png" alt="Comune di Torviscosa" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Torviscosa</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/trivignanoudinese-150x150.gif" alt="Comune di Trivignano Udinese" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Trivignano Udinese</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/villesse-e1583497161253.gif" alt="Comune di Villesse" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Villesse</span>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+        <img src="assets/loghi comuni/Visco-150x150.png" alt="Comune di Visco" style="height: 80px; width: auto; max-width: 100px; object-fit: contain; border-radius: 12px; transition: all 0.3s ease; cursor: pointer;" 
+             onmouseover="this.style.transform='perspective(1000px) rotateY(10deg) rotateX(-10deg) scale(1.05)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.3)'; this.style.borderRadius='16px';"
+             onmouseout="this.style.transform='perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.1)'; this.style.borderRadius='12px';" />
+        <span style="font-size: 0.75rem; text-align: center; color: var(--text-muted);">Visco</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>1918/2018</p>
+      <p class="footer-brand-desc">Un progetto culturale partecipato che racconta storie di uomini e donne all'epoca della Grande Guerra nei territori del Friuli Venezia Giulia.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">Il Progetto</a></li>
+        <li><a href="index.html#gallery">Galleria</a></li>
+        <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Oltre il confine</p>
+      <ul class="footer-links">
+        <li><a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+        <li><a href="#">Archivio</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+        <li><a href="#">Cikale Operose APS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Oltreconfine 1918/2018 · Progetto culturale Cikale Operose</p>
+    <p class="footer-tag">Friuli Venezia Giulia · Memoria della Grande Guerra</p>
+  </div>
+</footer>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>
