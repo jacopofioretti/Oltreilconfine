@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Programma — Le passeggiate teatrali di Oltreconfine 1918/2018 nel Friuli Venezia Giulia." />
+  <meta property="og:title" content="Programma · Oltreconfine" />
+  <meta name="theme-color" content="#142C14" />
+  <title>Programma · Oltreconfine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=1.4" />
+</head>
+<body>
+
+<!-- ── Loader ───────────────────────────────── -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- NAV -->
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html" class="nav-logo" aria-label="Torna alla home">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">Programma</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#about">Il Progetto</a></li>
+    <li><a href="index.html#locandine">Locandine</a></li>
+    <li><a href="index.html#phases">Fasi</a></li>
+    <li><a href="galleria.html">Galleria</a></li>
+    <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+    <li class="nav-dropdown">
+      <a href="oltreilconfine-1918-2018.html" class="nav-dropdown-toggle">Oltre il confine <span class="nav-dropdown-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+        <li><a href="programma.html">Programma</a></li>
+        <li><a href="approfondimenti.html">Approfondimenti</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#contact" class="nav-cta">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html#about">Il Progetto</a>
+  <a href="index.html#locandine">Locandine</a>
+  <a href="index.html#phases">Fasi</a>
+  <a href="galleria.html">Galleria</a>
+  <a href="rassegna-stampa.html">Rassegna Stampa</a>
+  <div class="nav-mobile-dropdown">
+    <a href="oltreilconfine-1918-2018.html" class="nav-mobile-dropdown-toggle">Oltre il confine ▼</a>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a>
+      <a href="memoria.html">Memoria</a>
+      <a href="note-artistiche.html">Note Artistiche</a>
+      <a href="programma.html">Programma</a>
+      <a href="approfondimenti.html">Approfondimenti</a>
+    </div>
+  </div>
+  <a href="index.html#contact">Contatti</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero" style="height:55vh; min-height:420px;">
+  <div class="hero-bg" id="hero-bg">
+    <img src="assets/truppe-al-fronte-300x197.jpg" alt="Truppe al fronte — Grande Guerra" fetchpriority="high" style="object-position:center 30%;" />
+  </div>
+  <div class="hero-content" style="padding-bottom:4rem;">
+    <p class="hero-eyebrow">Oltreconfine 1918/2018</p>
+    <h1 class="hero-title" style="font-size:clamp(2.5rem,7vw,6rem);">Pro<em>gramma</em></h1>
+    <div class="hero-verse" style="margin-bottom:0;">
+      <blockquote>"In cammino: la pace dei morti,<br>il silenzio dei vivi"</blockquote>
+      <cite>Passeggiata teatrale · Estate 2018</cite>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO + LOCANDINA -->
+<section class="about" id="content">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text-block">
+        <p class="section-label reveal">Estate 2018</p>
+        <h2 class="section-title reveal" data-delay="1">La <em>Passeggiata</em><br>Teatrale</h2>
+        <div class="reveal" data-delay="2">
+          <p><strong>OLTRECONFINE 1918/2018</strong> si è concluso con una lunga passeggiata teatrale che ha attraversato 17 Comuni del Friuli Venezia Giulia nell'estate 2018, nel centenario della fine della Grande Guerra.</p>
+          <p>Il percorso <em>"In cammino: la pace dei morti, il silenzio dei vivi"</em>, diretto da Francesco Accomando, ha coinvolto attori non professionisti formatisi in mesi di laboratorio sulle storie e le memorie raccolte nelle comunità. Ognuno ha camminato nelle strade e nei luoghi storicamente significativi del proprio paese.</p>
+          <p>L'evento si è concluso all'<strong>Ara Pacis di Medea</strong>, restituendo alla collettività un patrimonio di memoria condivisa con oltre 1.500 presenze totali.</p>
+        </div>
+        <div class="about-stats reveal" data-delay="3">
+          <div class="stat-item"><div class="stat-number" data-count="17">17</div><div class="stat-label">Comuni</div></div>
+          <div class="stat-item"><div class="stat-number" data-count="1500">1.500</div><div class="stat-label">Presenze</div></div>
+          <div class="stat-item"><div class="stat-number" data-count="3">3</div><div class="stat-label">Anni di Progetto</div></div>
+          <div class="stat-item"><div class="stat-number" data-count="100">100</div><div class="stat-label">Anni dalla Guerra</div></div>
+        </div>
+      </div>
+      <div class="about-image-col reveal-right">
+        <div class="about-image-wrap" style="max-width:340px;margin:0 auto;">
+          <a href="http://www.oltreconfine-ww1.eu/wp-content/uploads/2018/08/OLTRECONFINE18_33x48_ESTATE-02.jpg" target="_blank" rel="noopener">
+            <img src="http://www.oltreconfine-ww1.eu/wp-content/uploads/2018/08/OLTRECONFINE18_33x48_ESTATE-02-206x300.jpg"
+                 alt="Locandina Programma Estate 2018" loading="lazy" style="width:100%;height:auto;" />
+          </a>
+          <p class="about-caption">Locandina ufficiale · Estate 2018</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE TAPPE -->
+    <hr style="border:none;border-top:1px solid var(--border);margin:4rem 0;" />
+    <p class="section-label reveal">Le Tappe</p>
+    <h2 class="section-title reveal" data-delay="1">Il <em>Percorso</em> 2018</h2>
+
+    <div class="timeline" style="margin-top:3rem;">
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">20</span><span class="timeline-date-month">GIU</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Palmanova</p><h3 class="timeline-title">Apertura — Porta Aquileia</h3><p class="timeline-venue">Loggia di guardia di Porta Aquileia · ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">22</span><span class="timeline-date-month">GIU</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Chiopris-Viscone</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Chiesa di San Martino · ore 21.15</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">25</span><span class="timeline-date-month">GIU</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Romans d'Isonzo</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">ore 21.15</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">27</span><span class="timeline-date-month">GIU</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Gonars</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Scuola primaria di Gonars · ore 21.15</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">02</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Campolongo Tapogliano</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">ore 21.15</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">04</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Bicinicco</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Sala don Lino Andreoli · ore 21.15</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">09</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Visco</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Piazza Libertà · ore 21.00</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">13</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">San Vito al Torre</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">ore 21.00</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">18</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Villesse</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Cappella Beato Odorico · ore 21.00</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">23</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Ruda</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Piazza Libertà · ore 21.00</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">25</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Trivignano Udinese</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Chiesa parrocchiale · ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">30</span><span class="timeline-date-month">LUG</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Aiello del Friuli</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">01</span><span class="timeline-date-month">AGO</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Bagnaria Arsa</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Chiesa dei SS. Pietro e Paolo · ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">03</span><span class="timeline-date-month">AGO</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Romans d'Isonzo</p><h3 class="timeline-title">Recupero — Passeggiata teatrale</h3><p class="timeline-venue">ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">06</span><span class="timeline-date-month">AGO</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Torviscosa</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">Chiesa dei SS. Pietro e Paolo · ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">09</span><span class="timeline-date-month">AGO</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">S. Maria la Longa</p><h3 class="timeline-title">Passeggiata teatrale</h3><p class="timeline-venue">ore 20.45</p></div></div>
+
+      <div class="timeline-item reveal"><div class="timeline-date"><span class="timeline-date-day">23</span><span class="timeline-date-month">AGO</span><div class="timeline-dot"></div></div><div class="timeline-body"><p class="timeline-location">Castions di Strada</p><h3 class="timeline-title">Recupero — Passeggiata teatrale</h3><p class="timeline-venue">Centro civico · ore 20.30</p></div></div>
+
+      <div class="timeline-item reveal" style="border-left:2px solid var(--gold);">
+        <div class="timeline-date"><span class="timeline-date-day" style="color:var(--gold-light);font-size:2.5rem;">29</span><span class="timeline-date-month" style="color:var(--gold);">AGO</span><div class="timeline-dot" style="background:var(--gold-light);width:14px;height:14px;right:-7px;"></div></div>
+        <div class="timeline-body">
+          <p class="timeline-location" style="color:var(--gold-light);">Medea · Evento Finale</p>
+          <h3 class="timeline-title">Ara Pacis — Passeggiata conclusiva</h3>
+          <p class="timeline-venue">In salita verso l'Ara Pacis · ore 20.45</p>
+          <div class="timeline-speakers"><span class="speaker-tag" style="border-color:var(--gold);color:var(--gold-light);">Oltre 1.500 presenze</span><span class="speaker-tag">Conclusione del progetto triennale</span></div>
+        </div>
+      </div>
+
+    </div><!-- /.timeline -->
+  </div><!-- /.section-inner -->
+</section>
+
+<!-- PARALLAX QUOTE -->
+<div class="parallax-divider" aria-hidden="true">
+  <img src="assets/truppe-al-fronte-300x197.jpg" alt="Truppe al fronte" loading="lazy" />
+  <div class="parallax-divider-content">
+    <p class="parallax-quote reveal">"Qui finisce la nostra storia di un confine.<br>Ma questo è solo un fatto transitorio."</p>
+    <p class="parallax-quote-author reveal" data-delay="2">Francesco Accomando — Direttore Artistico</p>
+  </div>
+</div>
+
+<!-- LINK TO APPROFONDIMENTI -->
+<section style="background:var(--smoke);padding:5rem 0;">
+  <div class="section-inner" style="text-align:center;">
+    <p class="section-label reveal" style="justify-content:center;">Archivio</p>
+    <h2 class="section-title reveal" data-delay="1" style="text-align:center;margin-bottom:1.5rem;">Storie, foto e <em>Approfondimenti</em></h2>
+    <p class="reveal" data-delay="2" style="max-width:52ch;margin:0 auto 2.5rem;color:rgba(245,240,232,0.65);font-size:1rem;line-height:1.85;">Ogni tappa ha la sua storia. Sfoglia l'archivio completo degli articoli, delle fotografie e delle testimonianze raccolte durante il progetto, dalla prima serata del 2017 all'Ara Pacis.</p>
+    <a href="approfondimenti.html" style="display:inline-flex;align-items:center;gap:0.6rem;border:1px solid var(--border);padding:0.9rem 2rem;font-family:var(--font-body);font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold-light);transition:background 0.3s,color 0.3s;" class="reveal" data-delay="3">
+      <span>Vai agli Approfondimenti</span>
+      <svg width="16" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5H15M15 5L11 1M15 5L11 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>1918/2018</p>
+      <p class="footer-brand-desc">Un progetto per tenere vivi i fatti attraverso il mondo dei vissuti e della gente comune.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#about">Il Progetto</a></li>
+        <li><a href="index.html#gallery">Galleria</a></li>
+        <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Oltre il confine</p>
+      <ul class="footer-links">
+        <li><a href="oltreilconfine-1918-2018.html">1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+        <li><a href="programma.html">Programma</a></li>
+        <li><a href="approfondimenti.html">Approfondimenti</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+        <li><a href="#">Cikale Operose APS</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Oltreconfine · Progetto culturale Cikale Operose</p>
+    <p class="footer-tag">Friuli Venezia Giulia · Centenario della Grande Guerra</p>
+  </div>
+</footer>
+<script src="js/main.js" defer></script>
+</body>
+</html>

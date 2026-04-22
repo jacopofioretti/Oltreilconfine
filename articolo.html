@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#142C14" />
+  <title id="page-title">Articolo · Oltreconfine</title>
+  <meta name="description" id="page-desc" content="Approfondimento del progetto Oltreconfine sulla Grande Guerra." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=1.4" />
+  <style>
+    .art-hero { position:relative; height:50vh; min-height:360px; display:flex; align-items:flex-end; overflow:hidden; }
+    .art-hero-bg { position:absolute; inset:0; z-index:0; }
+    .art-hero-bg img { width:100%; height:100%; object-fit:cover; filter:brightness(0.3) sepia(0.4); }
+    .art-hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, var(--ink) 0%, transparent 50%); }
+    .art-hero-content { position:relative; z-index:10; padding:0 clamp(1.5rem,7vw,7rem) clamp(3rem,5vw,4.5rem); width:100%; }
+    .art-body { background:var(--ink); }
+    .art-inner { max-width:760px; margin:0 auto; padding:clamp(3rem,6vw,5rem) clamp(1.5rem,6vw,5rem); }
+    .art-meta { display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:2.5rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+    .art-date { font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--gold); }
+    .art-tag { font-size:0.6rem; letter-spacing:0.15em; color:rgba(245,240,232,0.4); border:1px solid rgba(83,123,47,0.25); padding:0.2rem 0.6rem; border-radius:2px; }
+    .art-text { font-size:clamp(1rem,1.5vw,1.15rem); line-height:1.9; color:rgba(245,240,232,0.82); }
+    .art-text p { margin-bottom:1.5rem; }
+    .art-text strong { color:var(--parchment); font-weight:500; }
+    .art-text em { font-style:italic; color:var(--gold-light); }
+    .art-text img { width:100%; height:auto; margin:2rem 0; filter:sepia(0.1) brightness(0.88); }
+    .art-text a { color:var(--gold-light); border-bottom:1px solid var(--border); transition:border-color 0.3s; }
+    .art-text a:hover { border-color:var(--gold); }
+    .art-source { margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--border); font-size:0.7rem; letter-spacing:0.2em; color:var(--mist); }
+    .art-source a { color:var(--gold-light); }
+    .art-nav { display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; margin-top:4rem; padding-top:2rem; border-top:1px solid var(--border); }
+    .art-nav-btn { display:inline-flex; align-items:center; gap:0.6rem; font-size:0.65rem; letter-spacing:0.25em; text-transform:uppercase; color:rgba(245,240,232,0.55); border:1px solid var(--border); padding:0.6rem 1.2rem; transition:color 0.3s, border-color 0.3s; text-decoration:none; }
+    .art-nav-btn:hover { color:var(--gold-light); border-color:var(--gold); }
+    .art-no-content { font-family:var(--font-serif); font-size:1.1rem; font-style:italic; color:rgba(245,240,232,0.5); padding:2rem 0; text-align:center; }
+  </style>
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html" class="nav-logo" aria-label="Torna alla home">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">Approfondimenti</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#about">Il Progetto</a></li>
+    <li><a href="index.html#locandine">Locandine</a></li>
+    <li><a href="index.html#phases">Fasi</a></li>
+    <li><a href="galleria.html">Galleria</a></li>
+    <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+    <li class="nav-dropdown">
+      <a href="oltreilconfine-1918-2018.html" class="nav-dropdown-toggle">Oltre il confine <span class="nav-dropdown-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="note-artistiche.html">Note Artistiche</a></li>
+        <li><a href="programma.html">Programma</a></li>
+        <li><a href="approfondimenti.html">Approfondimenti</a></li>
+      </ul>
+    </li>
+    <li><a href="index.html#contact" class="nav-cta">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html#about">Il Progetto</a>
+  <a href="index.html#locandine">Locandine</a>
+  <a href="index.html#phases">Fasi</a>
+  <a href="galleria.html">Galleria</a>
+  <a href="rassegna-stampa.html">Rassegna Stampa</a>
+  <div class="nav-mobile-dropdown">
+    <a href="oltreilconfine-1918-2018.html" class="nav-mobile-dropdown-toggle">Oltre il confine ▼</a>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="oltreilconfine-1918-2018.html">Oltre il confine 1918/2018</a>
+      <a href="memoria.html">Memoria</a>
+      <a href="note-artistiche.html">Note Artistiche</a>
+      <a href="programma.html">Programma</a>
+      <a href="approfondimenti.html">Approfondimenti</a>
+    </div>
+  </div>
+  <a href="index.html#contact">Contatti</a>
+</div>
+
+<!-- HERO (popolato da JS) -->
+<section class="art-hero" id="art-hero">
+  <div class="art-hero-bg" id="art-hero-bg">
+    <img id="art-hero-img" src="assets/soldiers.jpg" alt="" fetchpriority="high" />
+  </div>
+  <div class="art-hero-content">
+    <p class="hero-eyebrow" id="art-eyebrow">Approfondimenti · Oltreconfine</p>
+    <h1 id="art-title" style="font-family:var(--font-serif);font-size:clamp(1.8rem,5vw,4rem);font-weight:300;line-height:1.15;max-width:20ch;"></h1>
+  </div>
+</section>
+
+<!-- CORPO ARTICOLO -->
+<article class="art-body">
+  <div class="art-inner">
+    <div class="art-meta" id="art-meta"></div>
+    <div class="art-text" id="art-text">
+      <p class="art-no-content">Caricamento in corso…</p>
+    </div>
+    <div class="art-source" id="art-source"></div>
+    <nav class="art-nav" id="art-nav" aria-label="Navigazione articoli">
+      <a href="approfondimenti.html" class="art-nav-btn">
+        <svg width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M15 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Torna agli Approfondimenti
+      </a>
+      <a href="#" id="art-prev" class="art-nav-btn" style="display:none;">
+        <svg width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M15 5H1M1 5L5 1M1 5L5 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+        Precedente
+      </a>
+      <a href="#" id="art-next" class="art-nav-btn" style="display:none;">
+        Successivo
+        <svg width="14" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5H15M15 5L11 1M15 5L11 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </a>
+    </nav>
+  </div>
+</article>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>Approfondimenti</p>
+      <p class="footer-brand-desc">Storie, fotografie e testimonianze dalle comunità del Friuli Venezia Giulia sulla Grande Guerra.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html#about">Il Progetto</a></li>
+        <li><a href="galleria.html">Galleria</a></li>
+        <li><a href="rassegna-stampa.html">Rassegna Stampa</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Oltre il confine</p>
+      <ul class="footer-links">
+        <li><a href="oltreilconfine-1918-2018.html">1918/2018</a></li>
+        <li><a href="memoria.html">Memoria</a></li>
+        <li><a href="programma.html">Programma</a></li>
+        <li><a href="approfondimenti.html">Approfondimenti</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 Oltreconfine · Progetto culturale Cikale Operose</p>
+    <p class="footer-tag">Friuli Venezia Giulia · Memoria della Grande Guerra</p>
+  </div>
+</footer>
+<script src="js/main.js" defer></script>
+
+<script src="js/articoli-data.js"></script>
+<script>
+// Dati articoli (stesso array di approfondimenti.html)
+const ARTICLES=[
+  {y:'2020',d:'17.07.2020',t:'"Oltreconfine": tre volumi di storie e memorie dal progetto sulla Grande Guerra',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2020/07/oltreconfine-cover-ebook-848x1234.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-tre-volumi-di-storie-e-memorie-dal-progetto-sulla-grande-guerra/',tags:['libri','memoria']},
+  {y:'2018',d:'15.09.2018',t:'Oltre 1.500 presenze nel 2018. Dall\'Ara Pacis di Medea un messaggio di speranza',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/09/OLTRECONFINE-2018-passeggiata-teatrale-Ara-Pacis-Medea-1-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltre-1-500-presenze-nel-2018-per-il-progetto-sulla-memoria-della-grande-guerra-dallara-pacis-di-medea-un-messaggio-di-speranza/',tags:['Medea','2018','teatro']},
+  {y:'2018',d:'27.08.2018',t:'Grande Guerra, evento straordinario a Medea – La passeggiata teatrale verso l\'Ara Pacis',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/08/20180829-001-ara-pacis-848x455.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-evento-straordinario-a-medea-la-passeggiata-teatrale-in-salita-verso-lara-pacis/',tags:['Medea','teatro']},
+  {y:'2018',d:'21.08.2018',t:'Grande Guerra, il 23 agosto la passeggiata teatrale a Castions di Strada',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/20180711-001-castions-848x1182.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-il-23-agosto-la-passeggiata-teatrale-incontra-la-comunita-di-castions-di-strada/',tags:['Castions','teatro']},
+  {y:'2018',d:'07.08.2018',t:'"Oltreconfine" porta la passeggiata teatrale a S. Maria la Longa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/08/20180809-001-s.maria-mereto-848x1302.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-oltreconfine-porta-la-passeggiata-teatrale-della-memoria-a-s-maria-la-longa/',tags:['S.Maria','teatro']},
+  {y:'2018',d:'04.08.2018',t:'Grande Guerra, la passeggiata teatrale arriva a Torviscosa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/08/OLTRECONFINE-2018-passeggiata-teatrale-848x566.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-arriva-a-torviscosa-lunedi-6-agosto/',tags:['Torviscosa','teatro']},
+  {y:'2018',d:'01.08.2018',t:'Grande Guerra, la passeggiata teatrale si recupera a Romans d\'Isonzo',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/OLTRECONFINE-2017-restituzione-teatrale-Gonars-1-ph-G-Russo-848x566.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-si-recupera-venerdi-3-agosto-a-romans-disonzo/',tags:['Romans','teatro']},
+  {y:'2018',d:'31.07.2018',t:'Centenario Grande Guerra, la passeggiata teatrale a Bagnaria Arsa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/OLTRECONFINE-passeggiata-teatrale-Villesse-8-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/centenario-grande-guerra-la-passeggiata-teatrale-di-oltreconfine-a-bagnaria-arsa/',tags:['Bagnaria Arsa','teatro']},
+  {y:'2018',d:'30.07.2018',t:'La passeggiata teatrale porta la memoria della Grande Guerra ad Aiello del Friuli',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/OLTRECONFINE-passeggiata-teatrale-Villesse-1-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/la-passeggiata-teatrale-di-porta-la-memoria-della-grande-guerra-ad-aiello-del-friuli/',tags:['Aiello','teatro']},
+  {y:'2018',d:'24.07.2018',t:'La Grande Guerra e Trivignano Udinese con la passeggiata teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/OLTRECONFINE-Bicinicco-passeggiata-teatrale-2-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/la-grande-guerra-e-trivignano-udinese-con-la-passeggiata-teatrale-della-memoria/',tags:['Trivignano','teatro']},
+  {y:'2018',d:'23.07.2018',t:'La memoria della Grande Guerra nella passeggiata teatrale a Ruda',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/OLTRECONFINE-Bicinicco-passeggiata-teatrale-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/la-memoria-della-grande-guerra-nella-passeggiata-teatrale-a-ruda/',tags:['Ruda','teatro']},
+  {y:'2018',d:'17.07.2018',t:'"Oltreconfine", la Grande Guerra a Villesse con la passeggiata teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/OLTRECONFINE-villesse-848x589.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-la-grande-guerra-a-villesse-con-la-passeggiata-teatrale-della-memoria/',tags:['Villesse','teatro']},
+  {y:'2018',d:'13.07.2018',t:'Grande Guerra, la passeggiata teatrale a S. Vito al Torre',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/20180716-001-s.vito_.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-di-oltreconfine-incontra-la-comunita-di-s-vito-al-torre/',tags:['S.Vito','teatro']},
+  {y:'2018',d:'10.07.2018',t:'Grande Guerra, la passeggiata teatrale a Castions di Strada',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/20180711-001-castions-848x1182.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-di-oltreconfine-incontra-la-comunita-di-castions-di-strada/',tags:['Castions','teatro']},
+  {y:'2018',d:'09.07.2018',t:'Grande Guerra, la comunità di Visco protagonista della passeggiata teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/oltreconfine-passeggiata-teatrale-Gonars-5-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-comunita-di-visco-protagonista-della-passeggiata-teatrale-di-oltreconfine/',tags:['Visco','teatro']},
+  {y:'2018',d:'03.07.2018',t:'Grande Guerra, la comunità di Bicinicco coinvolta nella passeggiata teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/07/oltreconfine-bicinicco.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-comunita-di-bicinicco-coinvolta-nella-passeggiata-teatrale-di-oltreconfine/',tags:['Bicinicco','teatro']},
+  {y:'2018',d:'30.06.2018',t:'Grande Guerra, la passeggiata teatrale a Campolongo Tapogliano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/campolongo-848x617.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-di-oltreconfine-coinvolge-la-comunita-di-campolongo-tapogliano/',tags:['Campolongo','teatro']},
+  {y:'2018',d:'27.06.2018',t:'Grande Guerra, la passeggiata teatrale di OLTRECONFINE a Gonars',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/OLTRECONFINE-passeggiata-teatrale-1-848x600.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-di-oltreconfine-incontra-la-comunita-di-gonars/',tags:['Gonars','teatro']},
+  {y:'2018',d:'24.06.2018',t:'Grande Guerra, la passeggiata teatrale a Romans d\'Isonzo',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/romans-versa-848x1373.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-di-oltreconfine-attraversa-le-strade-di-romans-disonzo/',tags:['Romans','teatro']},
+  {y:'2018',d:'20.06.2018',t:'Grande Guerra, la passeggiata teatrale a Chiopris-Viscone',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/chiopris-848x1273.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-la-passeggiata-teatrale-di-oltreconfine-attraversa-le-strade-di-chiopris-viscone/',tags:['Chiopris','teatro']},
+  {y:'2018',d:'18.06.2018',t:'OLTRECONFINE 1918/2018, inizia a Palmanova la passeggiata teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/loggia-palma.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-inizia-a-palmanova-la-passeggiata-teatrale-nel-centenario-della-grande-guerra/',tags:['Palmanova','teatro']},
+  {y:'2018',d:'09.06.2018',t:'OLTRECONFINE 1918/2018, una passeggiata teatrale attraversa il Friuli',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/06/OLTRECONFINE-2018-passeggiate-teatrali-848x1144.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-una-passeggiata-teatrale-attraversa-il-friuli-nel-centenario-della-grande-guerra/',tags:['teatro','programma']},
+  {y:'2018',d:'24.04.2018',t:'Storie e memorie tra il Friuli e la Russia nella serata di Romans',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/04/OLTRECONFINE-18-Romans-Versa-ponte-sullo-Judrio-edificio-bianco-a-dx-è-un-ospedale-militare-848x510.jpg',url:'https://www.oltreconfine-ww1.eu/storie-e-memorie-tra-il-friuli-e-la-russia-nella-serata-di-romans/',tags:['Romans','storia']},
+  {y:'2018',d:'23.03.2018',t:'OLTRECONFINE 1918/2018: concluso il ciclo delle serate, al via il lavoro teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/03/OLTRECONFINE-serata-Romans-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-concluso-il-ciclo-delle-serate-con-le-comunita-al-via-il-lavoro-del-gruppo-teatrale/',tags:['comunità','laboratorio']},
+  {y:'2018',d:'18.03.2018',t:'OLTRECONFINE 1918/2018 su Radio Spazio 103',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/03/OLTRECONFINE-18-ospedale-campolongo_-michele-tomeselli-848x539.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-su-radio-spazio-103/',tags:['radio','media']},
+  {y:'2018',d:'12.03.2018',t:'Foto, memorie, ricordi e musica alla serata-forum di Villesse',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/03/OLTRECONFINE-18-serata-Villesse-soldati-di-Villesse-1-848x879.jpg',url:'https://www.oltreconfine-ww1.eu/foto-memorie-ricordi-e-musica-alla-serata-forum-di-villesse/',tags:['Villesse','forum']},
+  {y:'2018',d:'07.03.2018',t:'OLTRECONFINE 1918/2018, a Torviscosa ultima serata',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/03/OLTRECONFINE-serata-Villesse-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-a-torviscosa-ultima-serata-tra-vite-storie-e-memorie-della-grande-guerra/',tags:['Torviscosa','forum']},
+  {y:'2018',d:'04.03.2018',t:'Serate-forum partecipate a Visco e Bagnaria Arsa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/03/OLTRECONFINE-18-serata-Visco-2-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/serate-forum-partecipate-a-visco-e-bagnaria-arsa/',tags:['Visco','Bagnaria','forum']},
+  {y:'2018',d:'03.03.2018',t:'Aiello, preti internati e al confino',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/03/cartolina-prete-confino-848x1193.jpg',url:'https://www.oltreconfine-ww1.eu/aiello-preti-internati-e-al-confino/',tags:['Aiello','storia','documenti']},
+  {y:'2018',d:'28.02.2018',t:'Storie e memorie a Romans e Trivignano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-ospedale-militare-Romans-dIsonzo-1-848x505.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-storie-e-memorie-di-grande-guerra-a-romans-disonzo-e-trivignano-udinese/',tags:['Romans','Trivignano']},
+  {y:'2018',d:'26.02.2018',t:'Approfondimenti storici alla serata-forum di Medea',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-18-serata-forum-Medea-1.jpg',url:'https://www.oltreconfine-ww1.eu/approfondimenti-storici-e-testimonianze-alla-serata-forum-di-medea/',tags:['Medea','forum']},
+  {y:'2018',d:'26.02.2018',t:'Storie dalla Grande Guerra con OLTRECONFINE a Santa Maria la Longa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-2018-serata-forum-Villesse-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/storie-familiari-e-documenti-dalla-grande-guerra-con-oltreconfine-19182018-a-santa-maria-la-longa/',tags:['S.Maria','forum']},
+  {y:'2018',d:'23.02.2018',t:'Bagnaria Arsa accoglie OLTRECONFINE 1918/2018',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-serata-forum-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/bagnaria-arsa-accoglie-oltreconfine-19182018-storie-e-testimonianze-sulla-grande-guerra/',tags:['Bagnaria','forum']},
+  {y:'2018',d:'21.02.2018',t:'OLTRECONFINE 1918/2018 ricerca a Visco storie e documenti',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-Campolongo-Tapogliano-Stefano-Perini-e-Giulia-Sattolo-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-ricerca-a-visco-storie-di-vita-e-documenti-sulla-grande-guerra/',tags:['Visco','forum']},
+  {y:'2018',d:'18.02.2018',t:'Storie dalla Grande Guerra con OLTRECONFINE a Villesse',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-Campolongo-Tapogliano-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/storie-familiari-e-documenti-sulla-grande-guerra-con-oltreconfine-19182018-a-villesse/',tags:['Villesse','forum']},
+  {y:'2018',d:'15.02.2018',t:'OLTRECONFINE 1918/2018, serata-forum a Gonars',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-serata-Medea-F-Accomando.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-serata-forum-a-gonars-tra-storie-e-documenti-sulla-grande-guerra/',tags:['Gonars','forum']},
+  {y:'2018',d:'14.02.2018',t:'OLTRECONFINE 1918/2018 incontra Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-Campolongo-Tapogliano-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-incontra-palmanova-memorie-racconti-documenti-della-grande-guerra/',tags:['Palmanova','forum']},
+  {y:'2018',d:'12.02.2018',t:'Gli eventi di Caporetto focus a Campolongo Tapogliano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-Campolongo-Tapogliano-Francesco-Accomando-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/gli-eventi-di-caporetto-focus-a-campolongo-tapogliano/',tags:['Campolongo','Caporetto','storia']},
+  {y:'2018',d:'10.02.2018',t:'Oltreconfine 1918/2018, documenti e testimonianza a Chiopris Viscone',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-Chiopris-Viscone-sacerdote.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-documenti-e-testimonianza-a-chiopris-viscone/',tags:['Chiopris','testimonianze']},
+  {y:'2018',d:'04.02.2018',t:'Memorie, racconti, documenti a Ruda, Campolongo e Medea',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/Stefano-Perini-storico-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/memorie-racconti-documenti-della-grande-guerra-a-ruda-a-campolongo-tapogliano-e-a-medea-con-oltreconfine-19182018/',tags:['Ruda','Campolongo','Medea']},
+  {y:'2018',d:'03.02.2018',t:'San Vito al Torre – foto e video della serata',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-serata-San-Vito-al-Torre-8-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/san-vito-al-torre-foto-e-video-della-serata/',tags:['S.Vito','forum','video']},
+  {y:'2018',d:'02.02.2018',t:'OLTRECONFINE 1918/2018 a Bicinicco',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/02/OLTRECONFINE-aiello-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-a-bicinicco-sulle-tracce-di-memorie-e-documenti-della-grande-guerra/',tags:['Bicinicco','forum']},
+  {y:'2018',d:'29.01.2018',t:'Memorie ad Aiello del Friuli con OLTRECONFINE 1918/2018',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/01/OLTRECONFINE-san-vito-accomando-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/memorie-e-documenti-della-grande-guerra-ad-aiello-del-friuli-con-oltreconfine-19182018/',tags:['Aiello','forum']},
+  {y:'2018',d:'24.01.2018',t:'Memorie dalla Grande Guerra a San Vito al Torre',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE-SAN-VITO-AL-TORRE-spettacolo2-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-memorie-e-documenti-dalla-grande-guerra-a-san-vito-al-torre/',tags:['S.Vito','forum']},
+  {y:'2018',d:'20.01.2018',t:'Seconda serata-forum a Chiopris Viscone',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/oltreconfine-palmanova-accomandi-848x630.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-seconda-serata-forum-sulla-grande-guerra-a-chiopris-viscone/',tags:['Chiopris','forum']},
+  {y:'2018',d:'16.01.2018',t:'OLTRECONFINE 1918/2018 al via a Castions di Strada',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/pubblico.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-al-via-con-la-prima-serata-a-castions-di-strada/',tags:['Castions','forum']},
+  {y:'2018',d:'15.01.2018',t:'OLTRECONFINE 15I17 – un progetto lungo un anno',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/cropped-oltreconfine-id.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-15i17-un-progetto-lungo-un-anno/',tags:['video','storia']},
+  {y:'2018',d:'13.01.2018',t:'OLTRECONFINE 1918/2018, al lavoro con le comunità del FVG',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/01/OLTRECONFINE-1918-2018-presentazione-Palmanova-1-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-al-lavoro-con-le-comunita-del-fvg-sulla-memoria-della-grande-guerra/',tags:['Palmanova','comunità']},
+  {y:'2018',d:'11.01.2018',t:'OLTRECONFINE 1918/2018 si presenta a Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/01/OLTRECONFINE-2018-presentazione-848x505.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19182018-si-presenta-a-palmanova-terza-edizione-del-progetto-sulla-grande-guerra/',tags:['Palmanova','presentazione']},
+  {y:'2018',d:'06.01.2018',t:'Restituzioni teatrali, evento finale a Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/01/OLTRECONFINE-restituzioni-teatrali-Palmanova-9-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-evento-finale-a-palmanova/',tags:['Palmanova','teatro']},
+  {y:'2017',d:'04.01.2018',t:'Restituzioni teatrali, serata a Castions di Strada',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/01/OLTRECONFINE-restituzioni-teatrali-Castions-di-Strada-7.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-castions-di-strada/',tags:['Castions','teatro']},
+  {y:'2017',d:'02.01.2018',t:'Restituzioni teatrali, serata a Visco',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2018/01/OLTRECONFINE-restituzione-teatrale-Visco-1-848x594.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-visco/',tags:['Visco','teatro']},
+  {y:'2017',d:'27.12.2017',t:'Restituzioni teatrali, serata a Romans d\'Isonzo',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-restituzione-teatrale-Romans-dIsonzo-1.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-romans-disonzo/',tags:['Romans','teatro']},
+  {y:'2017',d:'21.12.2017',t:'Restituzioni teatrali, serata a Bagnaria Arsa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-restituzioni-teatrali-Bagnaria-Arsa-1-848x566.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-bagnaria-arsa/',tags:['Bagnaria','teatro']},
+  {y:'2017',d:'16.12.2017',t:'Restituzioni teatrali, serata a Bicinicco',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-restituzioni-teatrali-Bicinicco-1-848x566.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-bicinicco/',tags:['Bicinicco','teatro']},
+  {y:'2017',d:'13.12.2017',t:'Restituzioni teatrali, serata ad Aiello del Friuli',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-restituzioni-teatrali-Aiello-1.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-ad-aiello-del-friuli/',tags:['Aiello','teatro']},
+  {y:'2017',d:'08.12.2017',t:'Restituzioni teatrali, serata a Villesse',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-restituzione-teatrale-Villesse-5-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-villesse/',tags:['Villesse','teatro']},
+  {y:'2017',d:'06.12.2017',t:'Restituzioni teatrali, serata a Campolongo Tapogliano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/12/OLTRECONFINE-restituzione-teatrale-Campolongo-Tapogliano-4-848x1272.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-campolongo-tapogliano/',tags:['Campolongo','teatro']},
+  {y:'2017',d:'30.11.2017',t:'Restituzioni teatrali, serata a Ruda',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE-restituzione-teatrale-RUDA-1-848x441.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-ruda/',tags:['Ruda','teatro']},
+  {y:'2017',d:'25.11.2017',t:'Restituzioni teatrali, serata a San Vito al Torre',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE-SAN-VITO-AL-TORRE-spettacolo1.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-san-vito-al-torre/',tags:['S.Vito','teatro']},
+  {y:'2017',d:'20.11.2017',t:'Rivolte e tribunali – un video dalle restituzioni teatrali',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/oc-video.jpg',url:'https://www.oltreconfine-ww1.eu/rivolte-e-tribunali-un-video-dalle-restituzioni-teatrali/',tags:['video','teatro']},
+  {y:'2017',d:'18.11.2017',t:'Restituzioni teatrali, serata a Chiopris-Viscone',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE-restituzione-teatrale-Chiopris-2-848x566.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-serata-a-chiopris-viscone/',tags:['Chiopris','teatro']},
+  {y:'2017',d:'16.11.2017',t:'Restituzioni teatrali, la serata a Gonars',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE-restituzione-teatrale-Gonars-1-ph-G-Russo-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-la-serata-a-gonars/',tags:['Gonars','teatro']},
+  {y:'2017',d:'12.11.2017',t:'Restituzioni teatrali, la serata a Torviscosa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE-restituzione-Torviscosa-scuola-ph-Gianni-Russo-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-la-serata-a-torviscosa/',tags:['Torviscosa','teatro']},
+  {y:'2017',d:'10.11.2017',t:'Restituzioni teatrali, la serata a Trivignano/Clauiano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/OLTRECONFINE_restituzione-clauiano_002-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-la-serata-a-trivignanoclauiano/',tags:['Trivignano','teatro']},
+  {y:'2017',d:'08.11.2017',t:'Restituzioni teatrali, la serata a Medea',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/001_medea_ospedale-militare-848x584.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-la-serata-a-medea/',tags:['Medea','teatro']},
+  {y:'2017',d:'06.11.2017',t:'Restituzioni teatrali, la serata a S. Maria la Longa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/11/santa-maria-la-longa-restituzione6-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/restituzioni-teatrali-la-serata-a-s-maria-la-longa/',tags:['S.Maria','teatro']},
+  {y:'2017',d:'31.10.2017',t:'Replica straordinaria a Palmanova per la restituzione teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/10/OLTRECONFINE_campolongo_002-848x669.jpg',url:'https://www.oltreconfine-ww1.eu/replica-straordinaria-a-palmanova-per-la-restituzione-teatrale-sulla-grande-guerra/',tags:['Palmanova','teatro']},
+  {y:'2017',d:'29.10.2017',t:'Chiude a Palmanova il tour della restituzione teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/OLTRECONFINE-restituzione-clauiano-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/chiude-a-palmanova-il-tour-della-restituzione-teatrale-sulla-grande-guerra/',tags:['Palmanova','teatro']},
+  {y:'2017',d:'15.10.2017',t:'Restituzione teatrale a Castions di Strada',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/10/OLTRECONFINE_ruda_001-848x401.jpg',url:'https://www.oltreconfine-ww1.eu/restituzione-teatrale-sulla-memoria-della-grande-guerra-a-castions-di-strada/',tags:['Castions','teatro']},
+  {y:'2017',d:'13.10.2017',t:'La memoria della Grande Guerra al Museo sul confine di Visco',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/10/OLTRECONFINE_campolongo_003-848x523.jpg',url:'https://www.oltreconfine-ww1.eu/la-memoria-della-grande-guerra-in-scena-al-museo-sul-confine-di-visco/',tags:['Visco','museo','teatro']},
+  {y:'2017',d:'08.10.2017',t:'Progetto OLTRECONFINE su RadioRai in friulano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/10/OLTRECONFINE_radiorai_01-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/progetto-oltreconfine-su-radiorai-in-friulano/',tags:['radio','media']},
+  {y:'2017',d:'30.09.2017',t:'Romans d\'Isonzo ospita la restituzione teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/Santa-Maria-24-BN-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/romans-disonzo-ospita-la-restituzione-teatrale-su-grande-guerra-e-memoria/',tags:['Romans','teatro']},
+  {y:'2017',d:'28.09.2017',t:'Restituzione teatrale sulla Grande Guerra a Bagnaria Arsa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/OLTRECONFINE-restituzione-clauiano-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/restituzione-teatrale-sulla-grande-guerra-per-a-bagnaria-arsa/',tags:['Bagnaria','teatro']},
+  {y:'2017',d:'22.09.2017',t:'A Bicinicco con la restituzione teatrale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/09/OLTRECONFINE_gonars_001-848x405.jpg',url:'https://www.oltreconfine-ww1.eu/a-bicinicco-con-la-restituzione-teatrale-su-grande-guerra-e-memoria/',tags:['Bicinicco','teatro']},
+  {y:'2017',d:'19.09.2017',t:'La Grande Guerra in Municipio ad Aiello del Friuli',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/09/OLTRECONFINE_restituzione-svito_001-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/la-grande-guerra-in-municipio-ad-aiello-del-friuli/',tags:['Aiello','teatro']},
+  {y:'2017',d:'16.09.2017',t:'Restituzione teatrale sulla Grande Guerra in scena a Villesse',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/09/OLTRCONFINE_campolongo_001-848x615.jpg',url:'https://www.oltreconfine-ww1.eu/restituzione-teatrale-sulla-grande-guerra-in-scena-a-villesse/',tags:['Villesse','teatro']},
+  {y:'2017',d:'12.09.2017',t:'La memoria della Grande Guerra a Campolongo Tapogliano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/09/OLTRECONFINE-restituzione-teatrale-Ruda-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/la-memoria-della-grande-guerra-in-scena-a-campolongo-tapogliano/',tags:['Campolongo','teatro']},
+  {y:'2017',d:'10.09.2017',t:'Ecco le date della restituzione teatrale di Oltreconfine 15I17',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/Santa-Maria-24-BN-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/ecco-le-date-della-restituzione-teatrale-di-oltreconfine-15i17/',tags:['teatro','programma']},
+  {y:'2017',d:'07.09.2017',t:'L\'orrore e lo spavento della Grande Guerra in scena a Ruda',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/OLTRECONFINE-restituzione-clauiano-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/lorrore-e-lo-spavento-della-grande-guerra-in-scena-a-ruda/',tags:['Ruda','teatro']},
+  {y:'2017',d:'05.09.2017',t:'"A occhi chiusi e non era solo orrore e spavento" a San Vito al Torre',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/Santa-Maria-24-BN-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/a-occhi-chiusi-e-non-era-solo-orrore-e-spavento-in-scena-a-san-vito-al-torre/',tags:['S.Vito','teatro']},
+  {y:'2017',d:'31.08.2017',t:'Grande Guerra e memoria in scena a Chiopris Viscone',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/OLTRECONFINE-restituzione-clauiano-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/grande-guerra-e-memoria-in-scena-a-chiopris-viscone/',tags:['Chiopris','teatro']},
+  {y:'2017',d:'29.08.2017',t:'Oltreconfine 15I17 sul TG Rai del FVG',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/tgr-rai-oltreconfine.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-15i17-sul-tg-rai-del-fvg/',tags:['media','tv']},
+  {y:'2017',d:'25.08.2017',t:'La memoria della Grande Guerra in scena a Gonàrs',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/OLTRECONFINE-restituzione-teatrale-848x566.jpg',url:'https://www.oltreconfine-ww1.eu/la-memoria-della-grande-guerra-in-scena-a-gonars/',tags:['Gonars','teatro']},
+  {y:'2017',d:'22.08.2017',t:'Trivignano Udinese ospita lo spettacolo al Museo di Clauiano',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/Santa-Maria-18-BN-848x477.jpg',url:'https://www.oltreconfine-ww1.eu/trivignano-udinese-ospita-lo-spettacolo-di-oltreconfine-al-museo-di-clauiano/',tags:['Trivignano','museo','teatro']},
+  {y:'2017',d:'19.08.2017',t:'La restituzione teatrale di Oltreconfine in scena a Torviscosa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/08/Santa-Maria-25-BN-848x403.jpg',url:'https://www.oltreconfine-ww1.eu/la-restituzione-teatrale-di-oltreconfine-in-scena-a-torviscosa/',tags:['Torviscosa','teatro']},
+  {y:'2017',d:'29.07.2017',t:'Restituzione pubblica a Medea per Oltreconfine 15-17',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/07/Savorgnan-FVG-ph-Giuseppe-Muradore-848x585.jpg',url:'https://www.oltreconfine-ww1.eu/restituzione-pubblica-a-medea-per-oltreconfine-15-17-grande-guerra-e-memoria-tornano-sulla-scena-teatrale/',tags:['Medea','teatro']},
+  {y:'2017',d:'15.07.2017',t:'Oltreconfine 15-17 arriva alla restituzione teatrale – debutto a S. Maria la Longa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/07/Romans-dIsonzo_ph-Daniel-Zorzin.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-15-17-arriva-alla-restituzione-teatrale-debutto-a-s-maria-la-longa/',tags:['S.Maria','teatro']},
+  {y:'2017',d:'06.07.2017',t:'Celso Macor e il "confine buono"',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/07/celso-macor.jpg',url:'https://www.oltreconfine-ww1.eu/celso-macor-e-il-confine-buono/',tags:['poesia','storia','Isonzo']},
+  {y:'2017',d:'28.06.2017',t:'Giampaolo Fioretti su Approfondimenti',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/06/OLTRECONFINE-fioretti-approfondimenti-848x623.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19152015-giampaolo-fioretti-su-approfondimenti/',tags:['intervista','media']},
+  {y:'2017',d:'09.06.2017',t:'Oltreconfine 1915/2015 disponibile in eBook',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/06/OLTRECONFINE_COVER_ok-1-848x1197.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19152015-disponibile-in-ebook/',tags:['libro','ebook']},
+  {y:'2017',d:'07.06.2017',t:'Con gli occhi all\'insù – intervento di Gianluca Comar',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/06/Pilota-Caudron-ph-Archivio-Caimi-Volontè-848x1309.jpg',url:'https://www.oltreconfine-ww1.eu/con-gli-occhi-allinsu-intervento-di-gianluca-comar/',tags:['aviazione','storia']},
+  {y:'2017',d:'25.05.2017',t:'Intervista Adriana Danielis, vicesindaco Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/05/oltreconfine-intervista-Adriana-Danielis.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-1915-2015-intervista-adriana-danielis-vicesindaco-palmanova/',tags:['intervista','Palmanova']},
+  {y:'2017',d:'15.05.2017',t:'Francesco Accomando racconta il percorso di Oltreconfine 1915-2015',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/05/OLTRECONFINE-accomando.jpg',url:'https://www.oltreconfine-ww1.eu/francesco-accomando-racconta-il-percorso-di-oltreconfine-1915-2015/',tags:['intervista','Accomando']},
+  {y:'2017',d:'24.04.2017',t:'Oltreconfine 1915/2015 diventa un libro sulla memoria della Grande Guerra',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/04/oltreconfine-restituzioni-video.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19152015-diventa-un-libro-sulla-memoria-della-grande-guerra/',tags:['libro','Palmanova']},
+  {y:'2017',d:'15.04.2017',t:'OLTRECONFINE 1915/2015, un libro racconta la memoria della Grande Guerra',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/04/OLTRECONFINE-cippo-confine-848x1131.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-19152015-diventa-un-libro-per-raccontare-la-memoria-della-grande-guerra/',tags:['libro','memoria']},
+  {y:'2017',d:'05.04.2017',t:'Delegazioni straniere agli ospedali nelle retrovie',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/04/baldo-yt.jpg',url:'https://www.oltreconfine-ww1.eu/delegazioni-straniere-in-visita-alluniversita-castrense-e-agli-ospedali-nelle-retrovie/',tags:['storia','ospedali']},
+  {y:'2017',d:'30.03.2017',t:'Testimonianze dalla Grande Guerra a Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/oltreconfine-liberamente-palmanova.jpg',url:'https://www.oltreconfine-ww1.eu/testimonianze-dalla-grande-guerra-raccolte-nel-territorio-di-palmanova/',tags:['Palmanova','testimonianze']},
+  {y:'2017',d:'25.03.2017',t:'16 luglio 1917 – Fucilazione Brigata Catanzaro a Santa Maria la Longa',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/fucilazione-848x598.jpg',url:'https://www.oltreconfine-ww1.eu/16-luglio-1917-la-fucilazione-della-brigata-catanzaro-a-santa-maria-la-longa/',tags:['storia','brigata','S.Maria']},
+  {y:'2017',d:'16.03.2017',t:'Brigata Sassari e Brigata Padova a Castions delle Mura',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/oltreconfine-pin.jpg',url:'https://www.oltreconfine-ww1.eu/brigata-sassari-e-brigata-padova-a-castions-delle-mura/',tags:['storia','soldati']},
+  {y:'2017',d:'14.03.2017',t:'Prima e dopo Caporetto',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/truppe.jpg',url:'https://www.oltreconfine-ww1.eu/prima-e-dopo-caporetto/',tags:['Caporetto','storia']},
+  {y:'2017',d:'13.03.2017',t:'I laboratori di Oltreconfine 15I17 sul Messaggero Veneto',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/oltreconfine-mv-848x896.jpg',url:'https://www.oltreconfine-ww1.eu/i-laboratori-di-oltreconfine-15i17-sul-mv/',tags:['media','stampa']},
+  {y:'2017',d:'11.03.2017',t:'Progetto Oltreconfine: al via i laboratori per l\'evento finale',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/cropped-oltreconfine-id.jpg',url:'https://www.oltreconfine-ww1.eu/progetto-oltreconfine-al-via-i-laboratori-per-levento-finale/',tags:['laboratorio','comunità']},
+  {y:'2017',d:'09.03.2017',t:'Vite spezzate',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/pubblico.jpg',url:'https://www.oltreconfine-ww1.eu/vite-spezzate/',tags:['storia','memoria']},
+  {y:'2017',d:'05.03.2017',t:'Diario di Maria Pia Virgolini (Sevegliano, 1909)',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/03/virgolini.jpg',url:'https://www.oltreconfine-ww1.eu/diario-di-maria-pia-virgolini-sevegliano-1909/',tags:['diari','testimonianze']},
+  {y:'2017',d:'25.02.2017',t:'Marco Sicuro – la testimonianza letteraria di Emilio Lussu',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/02/marco-sicuro-oltreconfine.jpg',url:'https://www.oltreconfine-ww1.eu/marco-sicuro-sulla-testimonianza-letteraria-di-emilio-lussu/',tags:['letteratura','storia']},
+  {y:'2017',d:'19.02.2017',t:'Il Coro Così di Ruda a Oltreconfine 15I17',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/02/ruda.jpg',url:'https://www.oltreconfine-ww1.eu/il-coro-cosi-di-ruda-a-oltreconfine-15i17/',tags:['musica','Ruda']},
+  {y:'2017',d:'15.02.2017',t:'La Storia come ricerca – intervento Carlo Del Mestre',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/02/OLTRECONFINE-CARLO-DEL-MESTRE.jpg',url:'https://www.oltreconfine-ww1.eu/la-storia-come-ricerca-intervento-carlo-del-mestre/',tags:['storia','ricerca']},
+  {y:'2017',d:'11.02.2017',t:'Il prete venuto dal Sud – storia di Don Gaetano Mauro',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/02/video-don-belletti.jpg',url:'https://www.oltreconfine-ww1.eu/il-prete-venuto-dal-sud-storia-di-don-gaetano-mauro/',tags:['sacerdoti','storia']},
+  {y:'2017',d:'01.02.2017',t:'Ferruccio Tassin: memorie di retrovia a Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/02/tassin.jpg',url:'https://www.oltreconfine-ww1.eu/ferruccio-tassin-memorie-di-retrovia-a-palmanova/',tags:['Palmanova','storia']},
+  {y:'2017',d:'31.01.2017',t:'Testimonianze raccolte dal Circolo Trevisan di Palmanova',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/oltreconfine-anteprima-video.jpg',url:'https://www.oltreconfine-ww1.eu/testimonianze-raccolte-dal-circolo-trevisan-di-palmanova/',tags:['Palmanova','testimonianze']},
+  {y:'2017',d:'29.01.2017',t:'Memorie di \'polenta e formadi\'',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/oltreconfine-polenta-formadi.jpg',url:'https://www.oltreconfine-ww1.eu/memorie-di-polenta-e-formadi/',tags:['testimonianze','tradizioni']},
+  {y:'2017',d:'26.01.2017',t:'Progetto Oltreconfine, intro Francesco Accomando',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/accomando.jpg',url:'https://www.oltreconfine-ww1.eu/progetto-oltreconfine-intro-francesco-accomando/',tags:['Accomando','video']},
+  {y:'2017',d:'25.01.2017',t:'Palmanova retrovia del Carso',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/oltreconfine-palmanova-1-848x630.jpg',url:'https://www.oltreconfine-ww1.eu/palmanova-retrovia-del-carso/',tags:['Palmanova','storia']},
+  {y:'2017',d:'22.01.2017',t:'Santa Maria la Longa, 19 gennaio 2017',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/Santa-Maria-la-Longa-1-848x565.jpg',url:'https://www.oltreconfine-ww1.eu/santa-maria-la-longa-19-gennaio-2017/',tags:['S.Maria','foto']},
+  {y:'2017',d:'22.01.2017',t:'Palmanova, 17 gennaio 2017',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/oltreconfine-palmanova-848x630.jpg',url:'https://www.oltreconfine-ww1.eu/palmanova-17-gennaio-2017/',tags:['Palmanova','foto']},
+  {y:'2017',d:'16.01.2017',t:'La cartolina di Oltreconfine 15/17',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/oltreconfine-incontri-2017.jpg',url:'https://www.oltreconfine-ww1.eu/la-cartolina-di-oltreconfine-1517/',tags:['programma','2017']},
+  {y:'2017',d:'16.01.2017',t:'Oltreconfine torna a esplorare la memoria della Grande Guerra',img:'https://www.oltreconfine-ww1.eu/wp-content/uploads/2017/01/soldiers-848x420.jpg',url:'https://www.oltreconfine-ww1.eu/oltreconfine-torna-a-esplorare-la-memoria-della-grande-guerra/',tags:['annuncio','2017']},
+];
+
+// Leggi id dall'URL
+const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get('id'), 10);
+const a = ARTICLES[id];
+
+if (!a) {
+  document.getElementById('art-title').textContent = 'Articolo non trovato';
+  document.getElementById('art-text').innerHTML = '<p>Torna agli <a href="approfondimenti.html">Approfondimenti</a>.</p>';
+} else {
+  // Meta
+  document.title = a.t + ' · Oltreconfine';
+  document.getElementById('page-title').textContent = a.t + ' · Oltreconfine';
+  document.getElementById('page-desc').setAttribute('content', a.t);
+
+  // Hero
+  const heroImg = document.getElementById('art-hero-img');
+  heroImg.src = a.img;
+  heroImg.alt = a.t;
+  heroImg.onerror = () => { heroImg.src = 'assets/soldiers.jpg'; };
+  document.getElementById('art-eyebrow').textContent = 'Approfondimenti · ' + a.y;
+  document.getElementById('art-title').textContent = a.t;
+
+  // Meta bar
+  const metaEl = document.getElementById('art-meta');
+  const tagsHtml = a.tags.map(tag => `<span class="art-tag">${tag}</span>`).join('');
+  metaEl.innerHTML = `<span class="art-date">${a.d}</span>${tagsHtml}`;
+
+  // Contenuto
+  const textEl = document.getElementById('art-text');
+  const content = window.ARTICOLI_CONTENT && window.ARTICOLI_CONTENT[id];
+  if (content) {
+    textEl.innerHTML = content;
+  } else {
+    // Nessun testo completo: mostra estratto + link
+    textEl.innerHTML = `
+      <p style="font-family:var(--font-serif);font-size:1.2rem;font-style:italic;line-height:1.7;color:var(--parchment);">
+        Questo articolo fa parte dell'archivio del progetto Oltreconfine 1918/2018 
+        e documenta le attività svolte nelle comunità del Friuli Venezia Giulia 
+        durante le serate-forum e le restituzioni teatrali.
+      </p>
+      <p>Il contenuto completo è disponibile sul sito originale del progetto.</p>`;
+  }
+
+  // Source link
+  document.getElementById('art-source').innerHTML =
+    `Fonte originale: <a href="${a.url}" target="_blank" rel="noopener">oltreconfine-ww1.eu ↗</a>`;
+
+  // Prev/Next
+  if (id > 0) {
+    const prev = document.getElementById('art-prev');
+    prev.href = 'articolo.html?id=' + (id - 1);
+    prev.style.display = 'inline-flex';
+  }
+  if (id < ARTICLES.length - 1) {
+    const next = document.getElementById('art-next');
+    next.href = 'articolo.html?id=' + (id + 1);
+    next.style.display = 'inline-flex';
+  }
+}
+</script>
+</body>
+</html>
