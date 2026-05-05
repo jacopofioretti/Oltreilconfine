@@ -185,6 +185,7 @@
     <p class="footer-tag">Friuli Venezia Giulia · Memoria della Grande Guerra</p>
   </div>
 </footer>
+<script src="js/contenuti.js"></script>
 <script src="js/main.js" defer></script>
 <script>
 // ══════════════════════════════════════════════════════════════════
@@ -349,85 +350,19 @@ function renderShell(art) {
 }
 
 // ══════════════════════════════════════════════════════════════════
-//  FETCH FULL CONTENT via CORS proxy — estrae il corpo articolo
+//  LOAD FULL CONTENT — da contenuti.js (locale, nessuna API esterna)
 // ══════════════════════════════════════════════════════════════════
-async function loadFullContent(art) {
+function loadFullContent(art) {
   const textEl = document.getElementById('art-text');
-  try {
-    // allorigins.win è un CORS proxy pubblico affidabile
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(art.url)}`;
-    const res = await fetch(proxyUrl);
-    if (!res.ok) throw new Error(`Proxy error ${res.status}`);
-    const data = await res.json();
-    const raw = data.contents;
-
-    // Parsa l'HTML ricevuto
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(raw, 'text/html');
-
-    // Selettori del corpo articolo WordPress
-    let body = doc.querySelector('.entry-content')
-      || doc.querySelector('article .post-content')
-      || doc.querySelector('.post-entry')
-      || doc.querySelector('article')
-      || doc.querySelector('main');
-
-    if (!body) throw new Error('Corpo articolo non trovato');
-
-    // Rimuovi elementi indesiderati
-    const toRemove = [
-      '.post-meta', '.post-categories', '.post-tags', '.sharedaddy',
-      '.jp-relatedposts', '.navigation', '.comments-area', '.comment-form',
-      'nav', 'footer', 'header', '.site-footer', '.site-header',
-      '.widget', '.sidebar', '.breadcrumb', '.wp-block-buttons',
-      'script', 'style', 'noscript',
-      '[class*="share"]', '[class*="social"]', '[class*="related"]',
-      '[class*="comment"]', '[class*="reply"]',
-    ];
-    toRemove.forEach(sel => {
-      body.querySelectorAll(sel).forEach(el => el.remove());
-    });
-
-    // Rimuovi link che puntano al vecchio sito ma preserva il testo
-    body.querySelectorAll('a[href*="oltreconfine-ww1.eu"]').forEach(a => {
-      const span = doc.createElement('span');
-      span.innerHTML = a.innerHTML;
-      a.replaceWith(span);
-    });
-
-    // Normalizza URL immagini (rendi assoluti quelli relativi)
-    body.querySelectorAll('img').forEach(img => {
-      const src = img.getAttribute('src') || '';
-      if (src.startsWith('/')) {
-        img.src = 'https://www.oltreconfine-ww1.eu' + src;
-      }
-      // Usa versione full-size se disponibile
-      const bigSrc = src.replace(/-\d+x\d+(\.\w+)$/, '$1');
-      if (bigSrc !== src) img.src = bigSrc;
-      img.loading = 'lazy';
-      img.removeAttribute('width');
-      img.removeAttribute('height');
-    });
-
-    // Rimuovi link di navigazione "Read More"
-    body.querySelectorAll('a').forEach(a => {
-      const txt = a.textContent.trim().toLowerCase();
-      if (txt === 'read more' || txt === 'leggi di più') a.remove();
-    });
-
-    const html = body.innerHTML.trim();
-    if (html.length < 30) throw new Error('Contenuto vuoto');
-
+  const html = CONTENT[artId];
+  if (html && html.trim().length > 20) {
     textEl.innerHTML = html;
-
-  } catch (err) {
-    console.warn('Proxy fallback:', err.message);
-    // Fallback: mostra immagine + descrizione dall'indice
+  } else {
+    // Fallback con immagine di copertina
     textEl.innerHTML = `
       <img src="${art.img}" alt="${art.t}" loading="lazy" style="max-width:100%;margin:0 0 2rem;" />
-      <p style="color:var(--mist);font-size:0.85rem;font-style:italic;">
-        Il contenuto completo non è al momento disponibile offline.<br>
-        Questo articolo è stato pubblicato il ${art.d} nell'ambito del progetto Oltreconfine 1918/2018.
+      <p style="color:var(--mist);font-size:0.9rem;font-style:italic;">
+        Questo articolo è stato pubblicato il ${art.d} nell'ambito del progetto Oltreconfine.
       </p>`;
   }
 }
