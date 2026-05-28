@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -22,8 +23,9 @@ jobs:
           server-dir: /www/
 
           exclude: |
-            **/__pycache__/**
             **/.git*
-            **/.github/**
-            **/venv/**
+            **/.git*/**
+            **/__pycache__/**
             **/node_modules/**
+            **/venv/**
+            .github/**
