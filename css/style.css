@@ -793,6 +793,9 @@ section { position: relative; }
 .phases {
   background: var(--smoke);
 }
+.phases .section-inner {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+}
 .phases-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1507,6 +1510,9 @@ section { position: relative; }
 .locandine {
   background: linear-gradient(180deg, var(--ink) 0%, var(--smoke) 100%);
 }
+.locandine .section-inner {
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
 .locandine-intro {
   max-width: 55ch;
   font-size: 1rem;
@@ -1810,4 +1816,203 @@ section { position: relative; }
   .hero-title { font-size: clamp(2.8rem, 12vw, 4rem); }
   .events-header { grid-template-columns: 1fr; }
   .about-stats { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* ════════════════════════════════════════
+   LANGUAGE TOGGLE — IT / SL
+════════════════════════════════════════ */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  margin-left: 0.5rem;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  cursor: none;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.45);
+  padding: 0.15rem 0.3rem;
+  border-radius: 12px;
+  transition: color 0.3s, background 0.3s;
+}
+.lang-btn.active {
+  color: var(--ink);
+  background: var(--gold);
+}
+.lang-btn:hover:not(.active) {
+  color: var(--gold-light);
+}
+.lang-sep {
+  font-size: 0.6rem;
+  color: var(--border);
+  pointer-events: none;
+}
+
+/* Mobile lang toggle */
+.lang-toggle-mobile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 0.4rem 1.2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.nav-mobile.open .lang-toggle-mobile {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.3s;
+}
+.lang-toggle-mobile .lang-btn {
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  cursor: pointer;
+}
+.lang-toggle-mobile .lang-sep {
+  font-size: 0.9rem;
+}
+
+/* ════════════════════════════════════════
+   SEZIONE DOCUMENTI
+════════════════════════════════════════ */
+.documenti {
+  min-height: 100vh;
+  padding: var(--nav-h) 0 0;
+}
+.documenti-hero {
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem) 3rem;
+  max-width: 1320px;
+  margin: 0 auto;
+  text-align: center;
+}
+.documenti-intro {
+  max-width: 60ch;
+  margin: 1.5rem auto 0;
+  color: rgba(245,240,232,0.65);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.documenti-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 2rem auto;
+}
+
+/* Documents grid */
+.documenti-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 6vw, 5rem) clamp(4rem, 8vw, 7rem);
+}
+.doc-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: none;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+.doc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 0;
+  background: var(--gold);
+  transition: height 0.4s var(--ease-out);
+}
+.doc-card:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(83,123,47,0.5);
+  transform: translateY(-3px);
+}
+.doc-card:hover::before {
+  height: 100%;
+}
+.doc-card-icon {
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.doc-card-num {
+  font-size: 0.58rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.2rem;
+}
+.doc-card-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--parchment);
+  line-height: 1.3;
+}
+.doc-card-subtitle {
+  font-size: 0.75rem;
+  color: var(--mist);
+  letter-spacing: 0.1em;
+}
+.doc-card-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+.doc-card-actions .locandina-btn {
+  font-size: 0.62rem;
+  padding: 0.5rem 0.9rem;
+}
+
+/* Special card for Damiana Devetak (paired) */
+.doc-card-pair {
+  grid-column: span 1;
+  background: rgba(83,123,47,0.06);
+  border-color: rgba(83,123,47,0.4);
+}
+
+/* Silvo Stock group */
+.doc-section-title {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 6vw, 5rem) 1rem;
+}
+.doc-section-title h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(245,240,232,0.5);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.8rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .documenti-grid { grid-template-columns: 1fr; }
 }

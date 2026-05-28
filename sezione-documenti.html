@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sezione Documenti — Oltreconfine Ungaretti" />
+  <meta property="og:title" content="Sezione Documenti — Oltreconfine Ungaretti" />
+  <meta name="theme-color" content="#0c0a08" />
+  <title>Documenti — Oltreconfine Ungaretti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=1.5" />
+  <link rel="stylesheet" href="css/additions.css" />
+</head>
+<body>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-logo">Oltreconfine</div>
+  <div class="loader-bar"><div class="loader-progress" id="loader-progress"></div></div>
+  <div class="loader-count" id="loader-count">0%</div>
+</div>
+<div id="cursor" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<nav class="nav" role="navigation" aria-label="Menu principale">
+  <a href="index.html#hero" class="nav-logo" aria-label="Torna alla homepage">
+    <span class="nav-logo-main">Oltreconfine</span>
+    <span class="nav-logo-sub">Ungaretti · 1914–1919</span>
+  </a>
+  <ul class="nav-links" role="list">
+    <li><a href="index.html#about" data-i18n="nav.progetto">Il Progetto</a></li>
+    <li><a href="galleria.html" data-i18n="nav.galleria">Galleria</a></li>
+    <li><a href="drammaturgia.html" data-i18n="nav.drammaturgia">Drammaturgia</a></li>
+    <li><a href="sezione-documenti.html" data-i18n="nav.documenti">Documenti</a></li>
+    <li class="nav-dropdown">
+      <a href="#" class="nav-dropdown-toggle" data-i18n="nav.promozione">Promozione <span class="nav-dropdown-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="index.html#locandine" data-i18n="nav.locandine">Locandine</a></li>
+        <li><a href="rassegna-stampa.html" data-i18n="nav.rassegna">Rassegna Stampa</a></li>
+      </ul>
+    </li>
+    <li class="nav-dropdown">
+      <a href="oltreilconfine-1918-2018.html" class="nav-dropdown-toggle" data-i18n="nav.oltreconfine">Oltre il confine <span class="nav-dropdown-arrow">▼</span></a>
+      <ul class="nav-dropdown-menu">
+        <li><a href="oltreilconfine-1918-2018.html" data-i18n="nav.1918">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html" data-i18n="nav.memoria">Memoria</a></li>
+        <li><a href="note-artistiche.html" data-i18n="nav.note">Note Artistiche</a></li>
+        <li><a href="programma.html" data-i18n="nav.programma">Programma</a></li>
+        <li><a href="approfondimenti.html" data-i18n="nav.approfond">Approfondimenti</a></li>
+        <li><a href="pubblicazioni.html" data-i18n="nav.pubblicazioni">Pubblicazioni</a></li>
+      </ul>
+    </li>
+    <li class="nav-lang-item">
+      <div class="lang-toggle">
+        <button class="lang-btn" data-lang="it" onclick="I18n.setLang('it')">IT</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="sl" onclick="I18n.setLang('sl')">SL</button>
+      </div>
+    </li>
+    <li><a href="index.html#contact" class="nav-cta" data-i18n="nav.contatti">Contatti</a></li>
+  </ul>
+  <button class="nav-burger" id="nav-burger" aria-label="Apri menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <a href="index.html#about" data-i18n="nav.progetto">Il Progetto</a>
+  <a href="galleria.html" data-i18n="nav.galleria">Galleria</a>
+  <a href="drammaturgia.html" data-i18n="nav.drammaturgia">Drammaturgia</a>
+  <a href="sezione-documenti.html" data-i18n="nav.documenti">Documenti</a>
+  <div class="nav-mobile-dropdown">
+    <a href="#" class="nav-mobile-dropdown-toggle" data-i18n="nav.promozione">Promozione ▼</a>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="index.html#locandine" data-i18n="nav.locandine">Locandine</a>
+      <a href="rassegna-stampa.html" data-i18n="nav.rassegna">Rassegna Stampa</a>
+    </div>
+  </div>
+  <div class="nav-mobile-dropdown">
+    <a href="oltreilconfine-1918-2018.html" class="nav-mobile-dropdown-toggle" data-i18n="nav.oltreconfine">Oltre il confine ▼</a>
+    <div class="nav-mobile-dropdown-menu">
+      <a href="oltreilconfine-1918-2018.html" data-i18n="nav.1918">1918/2018</a>
+      <a href="memoria.html" data-i18n="nav.memoria">Memoria</a>
+      <a href="note-artistiche.html" data-i18n="nav.note">Note Artistiche</a>
+      <a href="programma.html" data-i18n="nav.programma">Programma</a>
+      <a href="approfondimenti.html" data-i18n="nav.approfond">Approfondimenti</a>
+      <a href="pubblicazioni.html" data-i18n="nav.pubblicazioni">Pubblicazioni</a>
+    </div>
+  </div>
+  <div class="lang-toggle-mobile">
+    <button class="lang-btn" data-lang="it" onclick="I18n.setLang('it')">IT</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" data-lang="sl" onclick="I18n.setLang('sl')">SL</button>
+  </div>
+  <a href="index.html#contact" data-i18n="nav.contatti">Contatti</a>
+</div>
+
+<!-- PDF MODAL -->
+<div class="pdf-modal" id="pdf-modal" role="dialog" aria-modal="true" aria-label="Visualizzatore PDF">
+  <div class="pdf-modal-header">
+    <span class="pdf-modal-title" id="pdf-modal-title"></span>
+    <div class="pdf-modal-actions">
+      <a class="pdf-modal-download" id="pdf-modal-download" href="#" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-i18n="modal.dl">Scarica</span>
+      </a>
+      <button class="pdf-modal-close" id="pdf-modal-close" data-i18n-aria="modal.close" aria-label="Chiudi visualizzatore">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="pdf-modal-body">
+    <iframe id="pdf-modal-iframe" title="Visualizzatore PDF" src="" allow="fullscreen"></iframe>
+  </div>
+</div>
+
+<!-- SEZIONE DOCUMENTI -->
+<section class="documenti" id="documenti">
+  <div class="documenti-hero">
+    <div class="reveal">
+      <p class="section-label" data-i18n="doc.label">Sezione Documenti</p>
+      <h2 class="section-title" data-delay="1" data-i18n="doc.title">I <em>Documenti</em> del Progetto</h2>
+    </div>
+    <div class="documenti-divider"></div>
+    <p class="documenti-intro reveal" data-i18n="doc.intro">
+      Raccolta dei contributi scritti dai partecipanti alle serate letterarie e dai collaboratori del progetto Oltreconfine Ungaretti.
+    </p>
+  </div>
+
+  <!-- Gruppo principale -->
+  <div class="doc-section-title reveal">
+    <h3 data-i18n="doc.group.contrib">Contributi</h3>
+  </div>
+  <div class="documenti-grid">
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Andrea%20Bellavite.pdf','Andrea Bellavite')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 01</p>
+        <p class="doc-card-name">Andrea Bellavite</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Andrea%20Bellavite.pdf','Andrea Bellavite')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Andrea%20Bellavite.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Antonino%20di%20Colloredo%20Mels.pdf','Antonino di Colloredo Mels')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 02</p>
+        <p class="doc-card-name">Antonino di Colloredo Mels</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Antonino%20di%20Colloredo%20Mels.pdf','Antonino di Colloredo Mels')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Antonino%20di%20Colloredo%20Mels.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Carlo%20Del%20Mestre.pdf','Carlo Del Mestre')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 03</p>
+        <p class="doc-card-name">Carlo Del Mestre</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Carlo%20Del%20Mestre.pdf','Carlo Del Mestre')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Carlo%20Del%20Mestre.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Carmen%20Mazzone.pdf','Carmen Mazzone')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 04</p>
+        <p class="doc-card-name">Carmen Mazzone</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Carmen%20Mazzone.pdf','Carmen Mazzone')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Carmen%20Mazzone.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Elisa%20De%20Zan.pdf','Elisa De Zan')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 05</p>
+        <p class="doc-card-name">Elisa De Zan</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Elisa%20De%20Zan.pdf','Elisa De Zan')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Elisa%20De%20Zan.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Ferruccio%20Tassin.pdf','Ferruccio Tassin')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 06</p>
+        <p class="doc-card-name">Ferruccio Tassin</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Ferruccio%20Tassin.pdf','Ferruccio Tassin')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Ferruccio%20Tassin.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Franca%20Grosso.pdf','Franca Grosso')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 07</p>
+        <p class="doc-card-name">Franca Grosso</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Franca%20Grosso.pdf','Franca Grosso')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Franca%20Grosso.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Giulia%20Sattolo.pdf','Giulia Sattolo')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 08</p>
+        <p class="doc-card-name">Giulia Sattolo</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Giulia%20Sattolo.pdf','Giulia Sattolo')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Giulia%20Sattolo.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Lucia%20Vinzi.pdf','Lucia Vinzi')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 09</p>
+        <p class="doc-card-name">Lucia Vinzi</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Lucia%20Vinzi.pdf','Lucia Vinzi')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Lucia%20Vinzi.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Paolo%20Bonini.pdf','Paolo Bonini')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 10</p>
+        <p class="doc-card-name">Paolo Bonini</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Paolo%20Bonini.pdf','Paolo Bonini')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Paolo%20Bonini.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Stefano%20Perini.pdf','Stefano Perini')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Contributo 11</p>
+        <p class="doc-card-name">Stefano Perini</p>
+        <p class="doc-card-subtitle">Testo — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Stefano%20Perini.pdf','Stefano Perini')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Stefano%20Perini.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- end documenti-grid -->
+
+  <!-- Silvo Stock -->
+  <div class="doc-section-title reveal">
+    <h3 data-i18n="doc.group.silvo">Contributi — Silvo Stock</h3>
+  </div>
+  <div class="documenti-grid">
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Silvo%20Stock%201.pdf','Silvo Stock — Parte 1')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Silvo Stock · 1</p>
+        <p class="doc-card-name">Silvo Stock</p>
+        <p class="doc-card-subtitle">Parte Prima — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Silvo%20Stock%201.pdf','Silvo Stock — Parte 1')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Silvo%20Stock%201.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Silvo%20Stock%202.pdf','Silvo Stock — Parte 2')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Silvo Stock · 2</p>
+        <p class="doc-card-name">Silvo Stock</p>
+        <p class="doc-card-subtitle">Parte Seconda — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Silvo%20Stock%202.pdf','Silvo Stock — Parte 2')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Silvo%20Stock%202.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Silvo%20Stock%203.pdf','Silvo Stock — Parte 3')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Silvo Stock · 3</p>
+        <p class="doc-card-name">Silvo Stock</p>
+        <p class="doc-card-subtitle">Parte Terza — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Silvo%20Stock%203.pdf','Silvo Stock — Parte 3')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Silvo%20Stock%203.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- end silvo grid -->
+
+  <!-- Damiana Devetak -->
+  <div class="doc-section-title reveal">
+    <h3 data-i18n="doc.group.damiana">Contributi — Damiana Devetak</h3>
+  </div>
+  <div class="documenti-grid">
+
+    <div class="doc-card doc-card-pair reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Damiana%20Devetak.pdf','Damiana Devetak — Italiano')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Damiana Devetak · IT</p>
+        <p class="doc-card-name">Damiana Devetak</p>
+        <p class="doc-card-subtitle">Versione Italiana — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Damiana%20Devetak.pdf','Damiana Devetak — Italiano')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Damiana%20Devetak.pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="doc-card doc-card-pair reveal" tabindex="0" role="button"
+         onclick="openPdfModal('assets/documenti/Damiana%20Devetak%20(sloveno).pdf','Damiana Devetak — Slovensko')">
+      <div class="doc-card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      </div>
+      <div>
+        <p class="doc-card-num">Damiana Devetak · SL</p>
+        <p class="doc-card-name">Damiana Devetak</p>
+        <p class="doc-card-subtitle">Slovenska Različica — Oltreconfine Ungaretti</p>
+      </div>
+      <div class="doc-card-actions">
+        <button class="locandina-btn locandina-btn-primary" onclick="event.stopPropagation(); openPdfModal('assets/documenti/Damiana%20Devetak%20(sloveno).pdf','Damiana Devetak — Slovensko')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="doc.view">Visualizza</span>
+        </button>
+        <a class="locandina-btn" href="assets/documenti/Damiana%20Devetak%20(sloveno).pdf" download onclick="event.stopPropagation()">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="doc.dl">Scarica</span>
+        </a>
+      </div>
+    </div>
+
+  </div><!-- end damiana grid -->
+</section>
+
+<footer class="footer" role="contentinfo">
+  <div class="footer-top">
+    <div>
+      <p class="footer-brand-name">Oltreconfine<br>Ungaretti</p>
+      <p class="footer-brand-desc" data-i18n="footer.desc">Un progetto transfrontaliero dedicato alla poesia attraverso i luoghi di Ungaretti, con il coinvolgimento delle comunità friulane, giuliane e slovene.</p>
+    </div>
+    <div>
+      <p class="footer-col-title" data-i18n="footer.sezioni">Sezioni</p>
+      <ul class="footer-links">
+        <li><a href="index.html#about" data-i18n="nav.progetto">Il Progetto</a></li>
+        <li><a href="galleria.html" data-i18n="nav.galleria">Galleria</a></li>
+        <li><a href="drammaturgia.html" data-i18n="nav.drammaturgia">Drammaturgia</a></li>
+        <li><a href="sezione-documenti.html" data-i18n="nav.documenti">Documenti</a></li>
+        <li><a href="rassegna-stampa.html" data-i18n="nav.rassegna">Rassegna Stampa</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title" data-i18n="footer.oltre">Oltre il confine</p>
+      <ul class="footer-links">
+        <li><a href="oltreilconfine-1918-2018.html" data-i18n="nav.1918">Oltre il confine 1918/2018</a></li>
+        <li><a href="memoria.html" data-i18n="nav.memoria">Memoria</a></li>
+        <li><a href="note-artistiche.html" data-i18n="nav.note">Note Artistiche</a></li>
+        <li><a href="programma.html" data-i18n="nav.programma">Programma</a></li>
+        <li><a href="approfondimenti.html" data-i18n="nav.approfond">Approfondimenti</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title" data-i18n="footer.contatti">Contatti</p>
+      <ul class="footer-links">
+        <li><a href="tel:+393394238228">+39 339 423 8228</a></li>
+        <li><a href="mailto:cikaleoperose@gmail.com">cikaleoperose@gmail.com</a></li>
+        <li>Cikale Operose APS</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy" data-i18n="footer.copy">© 2025 Oltreconfine Ungaretti · Finanziato dalla <a href="#">Regione Friuli Venezia Giulia</a> · <a href="#">Go!2025</a></p>
+    <p class="footer-tag" data-i18n="footer.tag">Gorizia &amp; Nova Gorica · Capitale Europea della Cultura</p>
+  </div>
+</footer>
+
+<script src="js/i18n.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
