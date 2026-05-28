@@ -10,22 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Deploy via FTP
+      - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+
           local-dir: ./
           server-dir: /www/
 
+          dangerous-clean-slate: true
+
           exclude: |
             **/.git*
-            **/.git*/**
+            **/.github/**
             **/__pycache__/**
             **/node_modules/**
             **/venv/**
-            .github/**
