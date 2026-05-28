@@ -197,6 +197,50 @@ const translations = {
     'pubbl.autori.ale.role':   'Editor',
     'pubbl.autori.ale.bio':    'Laureata in Tecniche Artistiche e dello Spettacolo a Venezia. Socia fondatrice di Cikale Operose. Ha collaborato con festival di teatro e cinema e con artisti del territorio.',
 
+
+    /* ── MODAL ── */
+    'modal.dl':          'Scarica',
+    'modal.close':       'Chiudi visualizzatore',
+
+    /* ── MEMORIA PAGE ── */
+    'mem.hero.eyebrow':  'Oltreconfine 1918/2018',
+    'mem.hero.title':    'Comunità<br>e <em>Memoria</em>',
+    'mem.hero.quote':    'Tenere vivi i fatti<br>attraverso il mondo dei vissuti',
+    'mem.hero.cite':     'Un progetto dal basso, per le comunità',
+    'mem.label':         'Memoria',
+    'mem.title':         'Vissuti e <em>Storie</em>',
+    'mem.p1':            'Tenere vivi i fatti attraverso il mondo dei vissuti e quindi della gente comune è il grande merito di questo progetto, che agisce sulla doppia dimensione storica e di consapevolezza.',
+    'mem.quote1':        '«Tenere vivi i fatti attraverso il mondo dei vissuti e quindi della gente comune è il grande merito di questo progetto, che agisce sulla doppia dimensione storica e di consapevolezza.»',
+    'mem.quote1.name':   'Francesco Martines',
+    'mem.quote1.role':   'Sindaco di Palmanova · Comune capofila',
+    'mem.caption':       'Truppe italiane in zona di retrovia · Friuli 1916–1918',
+    'mem.dir.label':     'Il Direttore Artistico',
+    'mem.stat.label':    'Il Progetto in Numeri',
+    'mem.stat1.l':       'Comuni del FVG',
+    'mem.stat2.l':       'Anni di Progetto',
+    'mem.stat3.l':       'Presenze 2018',
+    'mem.stat4.l':       'Volumi Pubblicati',
+
+    /* ── NOTE ARTISTICHE PAGE ── */
+    'note.label':        'Note Artistiche',
+    'note.title':        'Note <em>Artistiche</em>',
+
+    /* ── PROGRAMMA PAGE ── */
+    'prog.label':        'Programma',
+    'prog.title':        'Il <em>Programma</em>',
+
+    /* ── APPROFONDIMENTI PAGE ── */
+    'appr.label':        'Approfondimenti',
+    'appr.title':        '<em>Approfondimenti</em>',
+
+    /* ── OLTREILCONFINE 1918/2018 ── */
+    'oltre.label':       'Oltreconfine 1918/2018',
+    'oltre.title':       'Oltre il Confine<br><em>1918/2018</em>',
+
+    /* ── GALLERIA PAGE ── */
+    'gall.page.label':   'Galleria Fotografica',
+    'gall.page.title':   'Le <em>Immagini</em> del Progetto',
+    'gall.page.intro':   'Un viaggio visivo attraverso i luoghi di Ungaretti e le serate letterarie di Oltreconfine.',
     /* ── PDF MODAL ── */
     'modal.dl':          'Scarica',
     'modal.close':       'Chiudi visualizzatore',
@@ -353,50 +397,6 @@ const translations = {
 
 
     /* ── PUBBLICAZIONI PAGE ── */
-    'nav.pubblicazioni':       'Pubblicazioni',
-    'pubbl.eyebrow':           'Pubblicazioni · Graphic Novel',
-    'pubbl.hero.title':        '<em>Il Tempo che ci<br>è Rimasto Ancora</em>',
-    'pubbl.hero.quote':        '"Una storia universale<br>tra trincea e villaggio"',
-    'pubbl.hero.cite':         'Simona Dell\'Orto — Oltreconfine Ungaretti 2025',
-    'pubbl.label':             'Graphic Novel',
-    'pubbl.title':             'OLTRECONFINE UNGARETTI<br><em>la graphic novel</em>',
-    'pubbl.booktitle':         'IL TEMPO CHE CI È RIMASTO ANCORA',
-    'pubbl.credits.sogg':      'Soggetto e sceneggiatura · Simona Dell\'Orto',
-    'pubbl.credits.editor':    'Editor · Alessandra Lazzaro',
-    'pubbl.credits.grafica':   'Progetto grafico e illustrazioni · Simona Dell\'Orto',
-    'pubbl.intro.p1':          '<em>Il tempo che ci è rimasto ancora</em> è l\'atto finale di "Oltreconfine Ungaretti", progetto di rete finanziato dalla Regione Friuli nell\'ambito del bando dedicato a Ungaretti.',
-    'pubbl.intro.p2':          '<strong>Comune capofila:</strong> Sagrado. La rete include Campolongo Tapogliano, Doberdò del Lago, Mariano del Friuli, Romans d\'Isonzo, Santa Maria la Longa, Savogna d\'Isonzo e il Gruppo Speleologico Carsico; i Comuni di Gorizia e Nova Gorica nell\'ambito di <a href="https://www.go2025.eu/it" target="_blank" rel="noopener" style="color:var(--gold-light);">GO!2025</a>.',
-    'pubbl.intro.p3':          'Hanno collaborato al progetto l\'ISIS Galilei-Fermi-Pacassi e il Polo liceale sloveno Trubar-Gregorčič di Gorizia.',
-    'pubbl.intro.thanks':      'Si ringrazia Aleksandra Devetak del Circolo Culturale di Sdraussina (Sagrado, Gorizia) per le gentili traduzioni.',
-    'pubbl.dl.label':          'Ebook gratuito',
-    'pubbl.dl.title':          'Scarica o sfoglia la Graphic Novel',
-    'pubbl.dl.sub':            'PDF completo — bianco e nero — illustrazioni di Simona Dell\'Orto',
-    'pubbl.dl.btn.view':       'Sfoglia online',
-    'pubbl.dl.btn.dl':         'Scarica PDF',
-    'pubbl.cover.caption':     'Copertina — Illustrazione di Simona Dell\'Orto · 2025',
-    'pubbl.note.autrice.label':'Note dell\'Autrice',
-    'pubbl.note.autrice.name': 'Simona Dell\'Orto',
-    'pubbl.note.autrice.p1':   '"Il tempo che ci è rimasto ancora…" nasce nell\'ambito di Oltreconfine Ungaretti, atto conclusivo di un progetto che ha voluto indagare la figura dell\'uomo-poeta al di là della narrazione nota.',
-    'pubbl.note.autrice.p2':   'La graphic novel è un ulteriore "andare oltre", uno spogliare la Storia dei suoi connotati riconoscibili per restituire momenti che sono stati comuni a chiunque — civile o militare — abbia vissuto o viva tuttora la tragedia di una guerra.',
-    'pubbl.note.autrice.p3':   'Per questa ragione il soldato non ha nome né dettagli che possano indicare la sua appartenenza a un determinato esercito: è semplicemente "un soldato", un topos, una figura universale. Idem per la ragazza, alter-ego e incarnazione di tutta la società civile.',
-    'pubbl.note.autrice.p4':   'Da qui nasce l\'esigenza stilistica dell\'assenza del colore e del ricorso al bianco e nero, con poche tonalità di grigio. Una desaturazione della realtà che vuole anche suggerire l\'essenzialità della poesia.',
-    'pubbl.note.autrice.p5':   'La voce poetica non è solo quella ungarettiana ma anche quella di poeti e poetesse sloveni, perché le lingue possono anche essere diverse, ma il linguaggio poetico è universale e attraversa lo spazio e il tempo con immutata forza.',
-    'pubbl.note.dir.label':    'Note del Direttore Artistico',
-    'pubbl.note.dir.name':     'Francesco Accomando',
-    'pubbl.note.dir.p1':       'Quando incontrai per la prima volta l\'illustratrice Simona Dell\'Orto l\'obiettivo era stabilire le coordinate di impostazione della graphic novel.',
-    'pubbl.note.dir.p2':       'Le assegnavo solo tre vincoli di carattere generale: la presenza di un conflitto, due protagonisti — un lui italiano e una lei slovena — e l\'incontro ideale tra la poesia italiana di Giuseppe Ungaretti e quella slovena di Ljubka Šorli e Vida Jeraj.',
-    'pubbl.note.dir.p3':       'Entrambi, lettura e fumetto, sono testimonianza di una volontà a far correre la cultura italiana e slovena insieme, su due binari paralleli verso un incontro, un legame vero e una profonda unione.',
-    'pubbl.note.dir.p4':       'La nostra è la testimonianza di un passato e un augurio per il futuro.',
-    'pubbl.note.dir.role':     'Direttore Artistico · Oltreconfine Ungaretti',
-    'pubbl.autori.label':      'Gli Autori',
-    'pubbl.autori.title':      'Chi ha creato l\'opera',
-    'pubbl.autori.simona.role':'Soggetto, Sceneggiatura &amp; Illustrazioni',
-    'pubbl.autori.simona.bio': 'Graphic designer e illustratrice editoriale. Ha collaborato con Clementoni, Giunti, Raffaello Ragazzi, Eli, Nuinui, Coccole Books, Rainbow, Rusconi Editore e altri.',
-    'pubbl.autori.ale.role':   'Editor',
-    'pubbl.autori.ale.bio':    'Laureata in Tecniche Artistiche e dello Spettacolo a Venezia. Socia fondatrice di Cikale Operose. Ha collaborato con festival di teatro e cinema e con artisti del territorio.',
-
-
-    /* ── PUBBLICAZIONI PAGE ── */
     'nav.pubblicazioni':       'Publikacije',
     'pubbl.eyebrow':           'Publikacije · Grafični Roman',
     'pubbl.hero.title':        '<em>Čas, ki nam je<br>še ostal</em>',
@@ -438,6 +438,47 @@ const translations = {
     'pubbl.autori.simona.bio': 'Grafična oblikovalka in ilustratorka uredniških produktov za različne starostne skupine. Sodelovala je s Clementoni, Giunti, Raffaello Ragazzi, Eli, Nuinui, Coccole Books, Rainbow, Rusconi Editore in drugimi.',
     'pubbl.autori.ale.role':   'Urednica',
     'pubbl.autori.ale.bio':    'Diplomirala v Benetkah na smeri Umetniške in gledališke tehnike. Soustanoviteljica Cikale Operose. Sodelovala je s festivali gledališča in kina ter z umetniki tega področja.',
+
+
+    /* ── MEMORIA PAGE ── */
+    'mem.hero.eyebrow':  'Prek Meje 1918/2018',
+    'mem.hero.title':    'Skupnost<br>in <em>Spomin</em>',
+    'mem.hero.quote':    'Ohranjati dejstva živa<br>skozi svet doživetega',
+    'mem.hero.cite':     'Projekt od spodaj, za skupnosti',
+    'mem.label':         'Spomin',
+    'mem.title':         'Doživeto in <em>Zgodbe</em>',
+    'mem.p1':            'Ohranjati dejstva živa skozi svet doživetega in s tem navadnih ljudi je velika zasluga tega projekta, ki deluje na dvojni historični in ozaveščevalni ravni.',
+    'mem.quote1':        '«Ohranjati dejstva živa skozi svet doživetega in s tem navadnih ljudi je velika zasluga tega projekta, ki deluje na dvojni historični in ozaveščevalni ravni.»',
+    'mem.quote1.name':   'Francesco Martines',
+    'mem.quote1.role':   'Župan Palmanova · Vodilna občina',
+    'mem.caption':       'Italijanske enote v zalednem območju · Furlanija 1916–1918',
+    'mem.dir.label':     'Umetniški Direktor',
+    'mem.stat.label':    'Projekt v Številkah',
+    'mem.stat1.l':       'Občin FJK',
+    'mem.stat2.l':       'Let projekta',
+    'mem.stat3.l':       'Obiskovalcev 2018',
+    'mem.stat4.l':       'Objavljenih zvezkov',
+
+    /* ── NOTE ARTISTICHE PAGE ── */
+    'note.label':        'Umetniške Note',
+    'note.title':        'Umetniške <em>Note</em>',
+
+    /* ── PROGRAMMA PAGE ── */
+    'prog.label':        'Program',
+    'prog.title':        '<em>Program</em>',
+
+    /* ── APPROFONDIMENTI PAGE ── */
+    'appr.label':        'Poglobitve',
+    'appr.title':        '<em>Poglobitve</em>',
+
+    /* ── OLTREILCONFINE 1918/2018 ── */
+    'oltre.label':       'Prek Meje 1918/2018',
+    'oltre.title':       'Prek Meje<br><em>1918/2018</em>',
+
+    /* ── GALLERIA PAGE ── */
+    'gall.page.label':   'Fotografska Galerija',
+    'gall.page.title':   '<em>Slike</em> Projekta',
+    'gall.page.intro':   'Vizualno potovanje skozi Ungarettijeva mesta in literarne večere Oltreconfine.',
 
     /* ── PDF MODAL ── */
     'modal.dl':          'Prenesi',
