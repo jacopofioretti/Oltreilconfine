@@ -10,10 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: FTP Deploy
+      - name: FTP Deploy (simple mode)
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
@@ -23,12 +22,5 @@ jobs:
           local-dir: ./
           server-dir: /www/
 
-          state-name: .ftp-deploy-sync-state.json
-
-          exclude: |
-            **/.git/**
-            **/.git*
-            **/.github/**
-            **/node_modules/**
-            **/__pycache__/**
-            **/venv/**
+          log-level: minimal
+          dangerous-clean-slate: true
