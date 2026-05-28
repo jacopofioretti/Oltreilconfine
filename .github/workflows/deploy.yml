@@ -1,4 +1,4 @@
-name: Deploy su Aruba
+name: Deploy su Aruba - oltreconfine-ww1.it
 
 on:
   push:
@@ -12,15 +12,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: FTP Deploy (simple mode)
+      - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-
           local-dir: ./
           server-dir: /www/
-
           log-level: minimal
-          dangerous-clean-slate: true
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            __pycache__/**
+            README.md
+            *.pyc
