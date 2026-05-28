@@ -3,11 +3,12 @@ name: Deploy su Aruba
 on:
   push:
     branches:
-      - main  # o master, controlla il tuo branch
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -17,5 +18,12 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./          # cartella del tuo progetto
-          server-dir: /www/      # cartella pubblica su Aruba (di solito /www/ o /htdocs/)
+          local-dir: ./
+          server-dir: /www/
+
+          exclude: |
+            **/__pycache__/**
+            **/.git*
+            **/.github/**
+            **/venv/**
+            **/node_modules/**
